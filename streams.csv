@@ -1,0 +1,87 @@
+NDR 2 SH,https://icecast.ndr.de/ndr/ndr2/schleswigholstein/mp3/128/stream.mp3
+WDR 2,https://wdr-wdr2-rheinland.icecastssl.wdr.de/wdr/wdr2/rheinland/mp3/128/stream.mp3
+WDR 5,https://wdr-wdr5-live.icecastssl.wdr.de/wdr/wdr5/live/mp3/128/stream.mp3
+SWR 3,https://liveradio.swr.de/sw282p3/swr3/
+Bayern 2,https://dispatcher.rndfnk.com/br/br2/live/mp3/mid
+HR 3,https://dispatcher.rndfnk.com/hr/hr3-sued/mp3/high
+MDR aktuell,https://mdr-284340-0.sslcast.mdr.de/mdr/284340/0/mp3/high/stream.mp3
+RBB 24,http://dispatcher.rndfnk.com/rbb/inforadio/live/mp3/mid
+SRF 1,http://stream.srg-ssr.ch/drs1/mp3_128.m3u
+JAZZ Cafe,http://radio.wanderingsheep.tv:8000/jazzcafe
+Radio Swiss Jazz,https://stream.srg-ssr.ch/m/rsj/mp3_128
+Jazz London Radio,https://radio.canstream.co.uk:8075/live.mp3
+Sonic Universe,http://ice3.somafm.com/sonicuniverse-128-mp3
+FIP Jazz,https://icecast.radiofrance.fr/fipjazz-hifi.aac?id=radiofrance
+JAZZ.FM91,https://jazzfm91.streamb.live/SB00024
+Jazz 88,https://kbem-live.streamguys1.com/kbem_aac
+Celtic Music Radio,https://ukwesta.streaming.broadcast.radio/celtic
+Celtic Trad Radio,https://quincy.torontocast.com:2865/stream
+Celtic Sounds,https://stream.laut.fm/celtic-sound
+Celtic Moon,https://jenny.torontocast.com:2000/stream/CelticMoon
+Celtic Rock,https://celtic-rock.stream.laut.fm/celtic-rock
+Celtic Dance Tavern,https://jenny.torontocast.com:2000/stream/CelticDanceTavern
+CeltCast,https://caster04.streampakket.com/proxy/8982/CeltCast
+CBFM Cape Breton,https://s4.radio.co/s6f58ddb4f/listen
+CanalBREIZH,https://cast.canalbreizh.bzh/canalbreizh-hd-mp3
+Radio Bro Gwened,https://stream.radiobreizh.bzh/radio/9050/radio.mp3
+Folk Forward,http://api.somafm.com/folkfwd.pls
+Nordic Lodge Copenhagen,https://radio.streemlion.com:3590/stream
+EDM Nordic,https://a3.asurahosting.com:6780/radio.mp3
+FIP Rock,https://direct.fipradio.fr/live/fip-webradio1.aac
+Les Lums Radio,https://lyoncast.ovh:8000/radio.mp3
+Radio France,https://stream.laut.fm/radiofrance
+WDR 3,https://wdr-wdr3-live.icecastssl.wdr.de/wdr/wdr3/live/mp3/128/stream.mp3
+HR 2 kultur,https://dispatcher.rndfnk.com/hr/hr2/live/high
+NDR Kultur,https://icecast.ndr.de/ndr/ndrkultur/live/mp3/128/stream.mp3
+SWR Kultur,https://dispatcher.rndfnk.com/swr/swr2/live/mp3/256/stream.mp3
+MDR Klassik,https://mdr-284350-0.sslcast.mdr.de/mdr/284350/0/mp3/high/stream.mp3
+RBB Kultur,http://dispatcher.rndfnk.com/rbb/rbbkultur/live/mp3/high
+Classic FM,https://icecast.thisisdax.com/ClassicFM
+Classic FM Mood Pet Classics,https://media-ssl.musicradio.com/ClassicFM-M-Pets
+Bayern 1 Oberbayern,https://streams.br.de/bayern1obb_2.m3u
+Bayern 3,https://streams.br.de/bayern3_2.m3u
+Bayern Klassik,https://streams.br.de/br-klassik_2.m3u
+Bayern 24,https://streams.br.de/br24_2.m3u
+Bayern plus,https://streams.br.de/puls_2.m3u
+HR 1,https://hlshr1.akamaized.net/hls/live/2016533/hr1nordhessen/master.m3u8
+HR Info,https://hlshrinfo.akamaized.net/hls/live/2016539/hrinfo/master.m3u8
+YOU fm,https://hlsyoufm.akamaized.net/hls/live/2016538/youfm/master.m3u8
+RBB Antenne,http://www.antennebrandenburg.de/livemp3
+RBB 24 Info,http://www.inforadio.de/livemp3
+RBB 88.8,http://www.rbb888.de/livemp3
+RBB eins,http://www.radioeins.de/livemp3
+NDR 1,https://www.ndr.de/resources/metadaten/audio/aac/ndr1niedersachsen.m3u
+NDR 2 NS,https://www.ndr.de/resources/metadaten/audio/aac/ndr2.m3u
+NDR Info,https://www.ndr.de/resources/metadaten/audio/aac/ndrinfo.m3u
+N-JOY,https://www.ndr.de/resources/metadaten/audio/aac/n-joy.m3u
+NDR Blue,https://www.ndr.de/resources/metadaten/audio/aac/ndrblue.m3u
+MDR aktuell,http://mdr-284340-0.cast.mdr.de/mdr/284340/0/mp3/high/stream.mp3 
+MDR Sputnik Rock,http://mdr-284331-1.cast.mdr.de/mdr/284331/1/mp3/high/stream.mp3
+1 LIVE,https://wdr-1live-live.icecastssl.wdr.de/wdr/1live/live/mp3/128/stream.mp3
+WDR 4,https://wdr-wdr4-live.icecastssl.wdr.de/wdr/wdr4/live/mp3/128/stream.mp3
+COSMO WDR,https://wdr-cosmo-live.icecastssl.wdr.de/wdr/cosmo/live/mp3/128/stream.mp3
+WDR Event,https://wdr-cosmo-live.icecastssl.wdr.de/wdr/cosmo/live/mp3/128/stream.mp3
+DLF,https://st01.sslstream.dlf.de/dlf/01/high/aac/stream.aac?aggregator=web
+Soul Radio Classics,https://listen.soulradio.uk/uk
+FIP Radio Pop,https://icecast.radiofrance.fr/fippop-hifi.aac?id=radiofrance
+FIP Monde,https://icecast.radiofrance.fr/fipworld-hifi.aac
+Dons Art,https://stream.laut.fm/donsart
+iFusion Radio,https://listen.radioking.com/radio/523747/stream/582004
+Soul Club Radio,https://a1.asurahosting.com:8430/radio.mp3
+GotRadio The 60's,http://cdn.gotradio.com/itunes/classic_60s.pls
+Totally Radio 60s,http://playerservices.streamtheworld.com/api/livestream-redirect/T_RAD_60S_S01.mp3
+GotRadio The 70's,http://pureplay.cdnstream1.com/6013_128.mp3
+Totally Radio 70s,http://playerservices.streamtheworld.com/api/livestream-redirect/T_RAD_70S_S01.mp3
+GotRadio The 80s,http://cdn.gotradio.com/itunes/retro_80s.pls
+RADIO ANNI 80,http://nr11.newradio.it:9208/stream
+SomaFM: Underground 80s,http://api.somafm.com/u80s.pls
+Easy 80s,http://procyon.shoutca.st:8032/
+Eurodance 90,http://eurodance90stream.ddns.net/
+90s HITS,http://stream.zeno.fm/etd6kax1xv8uv
+VIRAGE RADIO ROCK 90,http://vir-wr01.ice.infomaniak.ch/vir-wr01.mp3
+70 80 90 VIBRAZIONI ROCK,https://maggie.torontocast.com:2020/stream/vibrazionirockradio
+Italo Radio FM,https://italodancefm.radioca.st/;
+Capital Jazz Radio,http://stream.radio.co/s7c1ea5960/listen
+Jazzrockfusion,https://jazzrockfusion.stream.laut.fm/jazzrockfusion
+Radio Caroline,http://sc8.radiocaroline.net/;
+Kind Of Blue,/freigabe/Miles Davis/Kind Of Blue/

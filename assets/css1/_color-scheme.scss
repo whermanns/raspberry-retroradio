@@ -1,0 +1,40 @@
+:root {
+    color-scheme:light dark;
+}
+  
+  
+@media (prefers-color-scheme: light) {
+  .fg {
+    color : $color-light;
+  }
+
+  .bg {
+    background-color: $bg-color-light;
+  }
+  pre, code {
+    color: $color-dark-green;
+  }    
+  .list-frame {
+    background-color: #fff;
+    color: $color-light;
+  }
+  #suchen {
+    background-color: #e9e9ed;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .fg {
+    color: $color-dark;
+  }
+
+  .bg {
+    background-color: $bg-color-dark;
+  }
+  pre, code {
+    color: $color-light-green;
+  }
+  .list-frame {
+    background-color: #444;
+    color: $color-dark;
+  }
+}

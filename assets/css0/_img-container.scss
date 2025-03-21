@@ -1,0 +1,78 @@
+
+.img-container {
+    border-radius: 6px 6px 0 0;
+    width: 100%;
+    aspect-ratio: 6;
+    padding: 0;
+    outline: 0;
+    position:relative;
+    overflow: hidden;
+  }
+  #img-pointer {
+    position:absolute;
+    top:15%;
+    transition: .3s;
+    height:70%;
+    img {
+      height: 100%;
+    }
+  }
+  
+  #donau-maske {
+    position: absolute;
+    top:0;
+    left:0;
+  }
+
+  .opacity0{
+    opacity:0;
+  }
+
+  .opacity100{
+    opacity: 100% !important;
+    transition: 5s;
+  }
+
+  .sel-c {
+    color: $sel-color;
+    padding: 0 2px;
+  }
+  .sel-bg {
+    transition: 1s;
+    background-color: rgba(255,255,0,.6);
+    border-radius:2px;
+    color:#000;
+  }
+  
+  #rstation1 {
+    top: 20%;
+    left: 45%;
+  }
+  #rstation2 {
+    top: 35%;
+    left: 50%;
+  }
+  #rstation3 {
+    top: 50%;
+    left: 55%;
+  }
+  #rstation4 {
+    top: 65%;
+    left: 60%;
+  }
+  #rstation5 {
+    top: 20%;
+    left: 65%;
+  }
+  #rstation6 {
+    top: 35%;
+    left: 70%;
+  }
+  #rstation7 {
+    top: 50%;
+    left: 75%;
+  }
+  #rstation8 {
+    top: 65%;
+    left: 80%;
+  }

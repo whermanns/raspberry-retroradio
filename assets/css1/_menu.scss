@@ -1,0 +1,83 @@
+
+#menu-icon {
+    z-index: 2;
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    width:8%;
+    max-width: 40px;
+    border-radius:20px;
+    cursor: pointer;
+}
+#menuImg {
+    width:102%;
+    display:block;
+}
+.grayscale {
+    filter: grayscale(100%);
+}
+.shadow {
+    box-shadow:$menu-img-shadow;
+}
+
+#menu-items {
+    position:absolute;
+    z-index: 1;
+    top:16px;
+    left:48px;
+    height:0;
+    display: block;
+    padding: .5em;
+    font-size: $fs-80;
+    border-radius: 4px;
+    box-shadow: $key-label-shadow;
+    transition: .2s;
+    opacity: 0;
+}
+.opacity-90 {
+    transition: .2s;
+    opacity: $opacity90 !important;
+}
+
+.hidden {
+    visibility: hidden;
+    display:none;
+}
+
+.a {
+    text-decoration: none;
+    padding: 3px;
+}
+.a:hover {
+    text-decoration: underline;
+}
+
+.dlg-img {
+    background-color: #fff3bf;
+    width:40%;
+    margin: 48px auto;
+    aspect-ratio: 2.4;
+    display:block;
+    border-radius:8px;
+}
+
+.dragover {
+    background-color: #bf5 !important;
+}
+
+.center {
+    text-align:center;
+}
+
+#btnExport {
+    background-image: url("../img/export.webp");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#drop {
+    background-image: url("../img/import.webp");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+  

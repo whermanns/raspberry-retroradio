@@ -1,0 +1,90 @@
+@import "vars";
+@import "color-scheme";
+@import "device-width";
+@import "menu";
+@import "img-container";
+@import "volume";
+@import "keyboard";
+
+* {
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1rem;
+}
+
+
+.codec {
+  margin: 2em;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.block {
+  display:block;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.flex-v {
+  display:flex;
+  flex-direction: column;
+}
+#url {
+  visibility: hidden;
+  text-align:right;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.w100 {
+  width:100%;
+}
+
+
+.m2 {
+  margin: 0 2px;
+}
+.mt4 {
+  margin-top:4px;
+}
+.fs-60 {
+  font-size: $fs-60;
+}
+.fs-70 {
+  font-size: $fs-70;
+}
+.fs-80 {
+  font-size: $fs-80;
+}
+.fright {
+  float: right;
+}
+
+
+p {
+  font-size: $fs-90;
+}
+
+.w120 {
+  width: $w120;
+}
+
+.bd {
+  border:.2px solid #aaa;
+  border-radius: 2px;
+}
+
+@import "modal";
+@import "datalist";

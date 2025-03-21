@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Retroradio</title>
+    <link rel="stylesheet" href="assets/css0/style.min.css"> 
+</head>
+<body>
+    <h1 id="retroradio">Retroradio</h1>
+    <p>Dieses Projekt realisiert ein Webradio auf Basis eines Raspberry Pi 3 oder 4. Dieser wird im headless-Modus, d.h. ohne Tastatur und Bildschirm betrieben. Er ist lediglich per WiFi mit dem heimischen LAN verbunden. Alle Funktionen des Webradios lassen sich mit Smartphone oder Notebook per Webbrowser steuern.</p>
+    <h2 id="merkmale">Merkmale</h2>
+    <ul>
+    <li>Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de">cc by-sa</a></li>
+    <li>Unterstützte Hardware<ul>
+    <li>Raspberry Pi</li>
+    <li>Rechner auf Basis von Debian, Ubuntu </li>
+    <li>und ähnlichen Betriebssystemen</li>
+    </ul>
+    </li>
+    <li>Einfache Installation</li>
+    <li>Webbasierte Bedienung<ul>
+    <li>Steuerung über PC oder Smartphone</li>
+    <li>Automatischer Hell-Dunkel-Modus</li>
+    </ul>
+    </li>
+    <li>Senderanzahl praktisch nicht begrenzt</li>
+    <li>Sender werden durch eine einfach strukturierte CSV-Datei bereitgestellt</li>
+    <li>CSV-Datei importieren und exportieren</li>
+    <li>Beispieldatei mit ca. 70 Radiostationen</li>
+    <li>Senderliste nach eigenen Wünschen anpassbar</li>
+    <li>Intuitive Senderwahl<ul>
+    <li>Gruppe auswählen und Sender anklicken oder</li>
+    <li>einen Buchstaben in die Suchleiste eingeben und  Vorschlag auswählen</li>
+    </ul>
+    </li>
+    <li>Vom Sender bereitgestellte Informationen anzeigen</li>
+    <li>Lokale bzw. im LAN gespeicherte Streams und Playlists abspielen</li>
+    <li>Playlist automatisch erstellen</li>
+    <li>Logarithmischer Lautstärkesteller</li>
+    <li>Zwei Anzeigeschemas nach historischen Radios<ul>
+    <li>Phillips Sirius BD431A<ul>
+    <li>Diaschau des zerlegten, unrestaurierten Radios</li>
+    </ul>
+    </li>
+    <li>Saba Donau F<ul>
+    <li>Animation der Senderanzeige auf der Skala</li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li>Original-Tastentöne beim Umschalten (abschaltbar) </li>
+    <li>Deutsch- oder englischsprachige Oberfläche</li>
+    <li>Weitere Sprachen können leicht hinzugefügt werden<ul>
+    <li>Z.B. die Datei <code>assets/lang/en.php</code> nach <code>assets/lang/fr.php</code> kopieren und diese anpassen</li>
+    <li>Sprache in der Datei <code>config.php</code> eintragen</li>
+    </ul>
+    </li>
+    </ul>
+    <hr>
+    <h2 id="installationsbeschreibung">Installationsbeschreibung</h2>
+    <ul>
+    <li>Basis: Raspberry PI OS (64-bit), inkl. Desktop Environment oder ein Rechner mit Debian, Ubuntu, o. ä.</li>
+    <li>SSH aktivieren</li>
+    <li>WLAN-Zugriff einstellen</li>
+    <li>Installation aktualisieren</li>
+    <li>Im Router, bzw. Pihole eine feste IP-Adresse und einen Namen, bspw. <code>retroradio.wlan</code> zuordnen</li>
+    </ul>
+    <pre><code class="lang-shell">sudo apt <span class="hljs-keyword">update</span>
+    sudo apt <span class="hljs-keyword">upgrade</span>
+    sudo reboot
+    </code></pre>
+    <p>Retroradio nutzt die Pakete <code>VLC</code> und <code>ffmpeg</code>.
+    Diese sind bereits in der Basisinstallation enthalten.</p>
+    <p>VLC und ffmpeg ggf. installieren:</p>
+    <pre><code class="lang-shell">sudo apt <span class="hljs-keyword">install</span> vlc ffmpeg
+    </code></pre>
+    <ul>
+    <li>Benutzername: <code>retroradio</code></li>
+    <li>Passwort: <code>raspberry</code></li>
+    </ul>
+    <p>Benutzername und Passwort sind in der Datei <code>config.php</code> (s. unten)
+    ggf. anzupassen. Das Konto muss in den Gruppe <code>audio</code> enthalten sein.</p>
+    <hr>
+    <h3 id="ggf-soundkarte-konfigurieren-hier-raspberry-pi-dac-pro">Ggf. Soundkarte konfigurieren, hier: Raspberry Pi DAC Pro</h3>
+    <p>Infos s.:
+    <a href="https://raspberrypi.com/products">raspberrypi.com/products</a></p>
+    <p>bzw.: <a href="https://www.raspberrypi.com/documentation/accessories/audio.html">raspberrypi.com/documentation/accessories/audio.html</a></p>
+    <p>Konfiguration im Editor öffen:</p>
+    <pre><code class="lang-shell">sudo nano /boot/firmware/<span class="hljs-built_in">config</span>.txt
+    </code></pre>
+    <p>Dort Paramter <code>dtparam=audio=on</code> auskommentieren</p>
+    <pre><code class="lang-conf">#dtparam=audio=<span class="hljs-keyword">on</span>
+    </code></pre>
+    <p>ändern in</p>
+    <pre><code class="lang-conf"><span class="hljs-attr">dtparam</span>=audio=<span class="hljs-literal">on</span>
+    </code></pre>
+    <p>Datei speichern und Raspberry Pi rebooten.</p>
+    <hr>
+    <h3 id="notwendige-pakete-installieren">Notwendige Pakete installieren</h3>
+    <p>Unbedingt erforderlich: <code>nginx</code>, <code>php-fpm</code>, <code>php-json</code></p>
+    <pre><code class="lang-shell">sudo apt <span class="hljs-keyword">install</span> nginx php-fpm php-<span class="hljs-keyword">json</span>
+    </code></pre>
+    <h4 id="optionale-pakete-installieren">Optionale Pakete installieren</h4>
+    <p>Falls Samba gewünscht:</p>
+    <pre><code class="lang-shell">sudo apt <span class="hljs-keyword">install</span> samba smbclient wsdd2
+    </code></pre>
+    <hr>
+    <h3 id="nginx-einrichten">Nginx einrichten</h3>
+    <p>Nginx so konfigurieren, dass PHP funktioniert:</p>
+    <p>Datei <code>/etc/nginx/sites-available/default</code> editieren:</p>
+    <p>Die Zeilen</p>
+    <pre><code class="lang-conf"># <span class="hljs-keyword">Add</span> <span class="hljs-keyword">index</span>.php <span class="hljs-keyword">to</span> the list <span class="hljs-keyword">if</span> you are <span class="hljs-keyword">using</span> PHP
+    <span class="hljs-keyword">index</span> <span class="hljs-keyword">index</span>.html <span class="hljs-keyword">index</span>.htm <span class="hljs-keyword">index</span>.nginx-debian.html;
+    </code></pre>
+    <p>in</p>
+    <pre><code class="lang-conf"># <span class="hljs-keyword">Add</span> <span class="hljs-keyword">index</span>.php <span class="hljs-keyword">to</span> the list <span class="hljs-keyword">if</span> you are <span class="hljs-keyword">using</span> PHP
+    <span class="hljs-keyword">index</span> <span class="hljs-keyword">index</span>.html <span class="hljs-keyword">index</span>.htm <span class="hljs-keyword">index</span>.php;
+    </code></pre>
+    <p>ändern und im Abschnitt</p>
+    <pre><code class="lang-conf"><span class="hljs-meta"># pass PHP scripts to FastCGI server</span>
+    <span class="hljs-meta">#</span>
+    <span class="hljs-meta">#location ~ \.php$ {</span>
+    <span class="hljs-meta">#   include snippets/fastcgi-php.conf;</span>
+    <span class="hljs-meta">#</span>
+    <span class="hljs-meta">#   # With php-fpm (or other unix sockets):</span>
+    <span class="hljs-meta">#   fastcgi_pass unix:/run/php/php7.4-fpm.sock;</span>
+    <span class="hljs-meta">#   # With php-cgi (or other tcp sockets):</span>
+    <span class="hljs-meta">#   fastcgi_pass 127.0.0.1:9000;</span>
+    <span class="hljs-meta">#}</span>
+    </code></pre>
+    <p>PHP-fpm in der Version 8.2 einbinden.</p>
+    <pre><code class="lang-conf"><span class="hljs-comment"># pass PHP scripts to FastCGI server</span>
+    <span class="hljs-comment">#</span>
+    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ \.php$</span> {
+        <span class="hljs-attribute">include</span> snippets/fastcgi-php.conf;
+        <span class="hljs-attribute">fastcgi_pass</span> unix:/run/php/php8.2-fpm.sock;
+    }
+    </code></pre>
+    <h4 id="aufr-umen">Aufräumen</h4>
+    <pre><code class="lang-shell">sudo rm /var/www/html/index<span class="hljs-selector-class">.nginx-debian</span><span class="hljs-selector-class">.html</span>
+    </code></pre>
+    <h4 id="nginx-neu-starten">Nginx neu starten</h4>
+    <pre><code class="lang-shell"><span class="hljs-attribute">sudo service nginx restart</span>
+    </code></pre>
+    <hr>
+    <h3 id="ggf-samba-konfigurieren">Ggf. Samba konfigurieren</h3>
+    <h4 id="ordner-f-r-die-netzwerkfreigabe-anlegen">Ordner für die Netzwerkfreigabe anlegen</h4>
+    <pre><code class="lang-shell">sudo <span class="hljs-built_in">mkdir</span> /freigabe
+    sudo <span class="hljs-built_in">mkdir</span> /freigabe/Papierkorb
+    </code></pre>
+    <p>Im Ordner <code>/freigabe/Papierkorb</code> eine Datei namens <code>desktop.ini</code> erstellen:</p>
+    <pre><code class="lang-shell">sudo nano <span class="hljs-regexp">/freigabe/</span>Papierkorb<span class="hljs-regexp">/desktop.ini</span>
+    </code></pre>
+    <p>Inhalt der Datei <code>desktop.ini</code>:</p>
+    <pre><code class="lang-conf"><span class="hljs-section">[.ShellClassInfo]</span>
+    <span class="hljs-attr">IconFile</span>=%SystemRoot%\system32\SHELL32.dll
+    <span class="hljs-attr">IconIndex</span>=<span class="hljs-number">32</span>
+    <span class="hljs-attr">IconResource</span>=C:\WINDOWS\System32\SHELL32.dll,<span class="hljs-number">32</span>
+    <span class="hljs-section">[ViewState]</span>
+    <span class="hljs-attr">Mode</span>=
+    <span class="hljs-attr">Vid</span>=
+    <span class="hljs-attr">FolderType</span>=Generic
+    </code></pre>
+    <p>Berechtigung einstellen</p>
+    <pre><code class="lang-shell">sudo chmod <span class="hljs-number">777</span> -R /freigabe
+    </code></pre>
+    <h4 id="freigabeordner-in-die-samba-konfigurationsdatei-eintragen">Freigabeordner in die Samba-Konfigurationsdatei eintragen</h4>
+    <pre><code class="lang-shell">sudo nano <span class="hljs-regexp">/etc/</span>samba<span class="hljs-regexp">/smb.conf</span>
+    </code></pre>
+    <p>Folgende Zeilen ans Ende der Datei anhängen</p>
+    <pre><code class="lang-conf">[freigabe]
+       <span class="hljs-keyword">comment</span> = Freigabe
+       <span class="hljs-keyword">create</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
+       <span class="hljs-keyword">directory</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
+       <span class="hljs-keyword">force</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0766</span>
+       <span class="hljs-keyword">force</span> <span class="hljs-keyword">directory</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0777</span>
+       guest ok = yes
+       browseable = yes
+       <span class="hljs-keyword">read</span> <span class="hljs-keyword">only</span> = <span class="hljs-keyword">no</span>
+       vfs objects = <span class="hljs-keyword">recycle</span>
+       <span class="hljs-keyword">recycle</span>:<span class="hljs-keyword">exclude</span> = *.tmp, *.bak
+       <span class="hljs-keyword">recycle</span>:keeptree = yes
+       <span class="hljs-keyword">recycle</span>:repository = Papierkorb
+    </code></pre>
+    <h4 id="sambabenutzer-anlegen">Sambabenutzer anlegen</h4>
+    <pre><code class="lang-shell"><span class="hljs-comment"># Konto retroradio anlegen und Passwort einrichten</span>
+    sudo smbpasswd <span class="hljs-_">-a</span> retroradio
+    </code></pre>
+    <p>Falls gewünscht, anonymen Zugang ohne Anmeldung einrichten. Dieser kann allerdings nicht von einem Windows-PC genutzt werden.</p>
+    <pre><code class="lang-shell"><span class="hljs-comment"># Anonymen Zugriff einrichten</span>
+    sudo smbpasswd -<span class="hljs-keyword">an</span> nobody
+    </code></pre>
+    <h4 id="sambadienst-neu-starten">Sambadienst neu starten</h4>
+    <pre><code class="lang-shell"><span class="hljs-attribute">sudo service smbd restart</span>
+    </code></pre>
+    <hr>
+    <h3 id="retroradio-installieren">Retroradio installieren</h3>
+    <h4 id="paket-in-den-ordner-var-www-html-entpacken">Paket in den Ordner /var/www/html entpacken</h4>
+    <pre><code class="lang-shell">sudo tar vxf retroradio-yyyy-mm-<span class="hljs-selector-tag">dd</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span> -C /var/www/html
+    </code></pre>
+    <hr>
+    <h4 id="retroradio-konfigurieren">Retroradio konfigurieren</h4>
+    <p>Die Datei <code>config.php</code>  befindet sich im Ordner <code>/var/www/html</code>.</p>
+    <p>Mögliche Anpassungen:</p>
+    <ul>
+    <li>Benutzernamen / Passwort anpassen</li>
+    <li>Spracheinstellung ändern</li>
+    <li>Fehleranzeige (de-)aktivieren</li>
+    <li>Tastentöne ab-/einschalten</li>
+    <li>Speicherort der Senderliste festlegen, Datei: <code>streams.csv</code></li>
+    </ul>
+    <h5 id="benutzernamen-passwort-anpassen">Benutzernamen / Passwort anpassen</h5>
+    <pre><code class="lang-conf"><span class="hljs-regexp">//</span> User account data
+    <span class="hljs-regexp">//</span> This account must be included
+    <span class="hljs-regexp">//</span> <span class="hljs-keyword">in</span> the <span class="hljs-string">'audio'</span> group
+    <span class="hljs-variable">$_user</span> = <span class="hljs-string">"retroradio"</span>;
+    <span class="hljs-variable">$_password</span> = <span class="hljs-string">"raspberry"</span>;
+    </code></pre>
+    <h5 id="sprache-einstellen">Sprache einstellen</h5>
+    <pre><code class="lang-conf"><span class="hljs-regexp">//</span> Language: auto, de, en, fr
+    <span class="hljs-variable">$_lang</span> = <span class="hljs-string">"auto"</span>;
+    </code></pre>
+    <h5 id="fehleranzeige-de-aktivieren">Fehleranzeige de-/aktivieren</h5>
+    <pre><code class="lang-conf">// Display errors: <span class="hljs-literal">true</span> / <span class="hljs-literal">false</span>
+    $_DISPLAY_ERRORS = <span class="hljs-literal">true</span><span class="hljs-comment">;</span>
+    </code></pre>
+    <h5 id="tastent-ne-ab-einschalten">Tastentöne ab-/einschalten</h5>
+    <pre><code class="lang-conf">
+    <span class="hljs-comment">// Original button sound of the</span>
+    <span class="hljs-comment">// Philips Sirius BD431A radio</span>
+    <span class="hljs-comment">// or Saba Donau f</span>
+    <span class="hljs-comment">// play when changing stations true/false</span>
+    $_play_key_click = <span class="hljs-literal">true</span>;
+    </code></pre>
+    <h5 id="speicherort-der-senderliste-festlegen-datei-streams-csv-">Speicherort der Senderliste festlegen, Datei: <code>streams.csv</code></h5>
+    <pre><code class="lang-conf"><span class="hljs-regexp">//</span> Location of the streams.csv file
+    <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"streams.csv"</span>;
+    <span class="hljs-regexp">//</span> <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"/freigabe/streams.csv"</span>;
+    <span class="hljs-regexp">//</span> <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"/tmp/streams.csv"</span>;
+    </code></pre>
+    <p><strong>Wichtig:</strong> Das Konto des Webservers <code>www-data</code> muss
+    Lese- und Schreibrechte in diesem Ordner haben.</p>
+    <h5 id="zugriff-auf-freigabeordner-einrichten">Zugriff auf Freigabeordner einrichten</h5>
+    <p>Beispiel: Die Datei wurde im Ordner <code>/freigabe</code> abgelegt.</p>
+    <pre><code class="lang-shell"><span class="hljs-title">sudo</span> chown www-<span class="hljs-class"><span class="hljs-keyword">data</span> -<span class="hljs-type">R</span> /freigabe</span>
+    </code></pre>
+    <p>oder</p>
+    <pre><code class="lang-shell">sudo chmod <span class="hljs-number">777</span> -R /freigabe
+    </code></pre>
+    <hr>
+    <h3 id="bedienung">Bedienung</h3>
+    <ul>
+    <li>Aktive Lautsprecherboxen oder Verstärker an den Audioausgang anschließen</li>
+    <li>Im Webbrowser die Seite <code>retroradio.wlan</code> aufrufen</li>
+    </ul>
+    <p>Der Rest ist selbsterklärend. Einfach ausprobieren. 😀</p>
+    <hr>
+    <p>Autor: <em>Walter Hermanns, 2025</em></p>
+
+</body>
+</html>

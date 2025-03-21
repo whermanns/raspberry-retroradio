@@ -1,0 +1,29 @@
+@media screen and (max-width: 640px) {
+    .container, .modal-content, .codec{
+        width:100%;
+        position:relative;
+    }
+    .key-wrapper{
+      width: 11%;
+    }
+    .klbl {
+      top: 60%;
+    }
+}
+@media screen and (min-width: 641px) {
+    .container, .modal-content{
+        max-width:810px;
+        margin: 0 auto;
+        position:relative;
+    }
+    .codec{
+        max-width:810px;
+        margin:0 auto;
+    }
+    .key-wrapper {
+        width: 9%;
+    }
+    .klbl {
+        top: 50%;
+    }
+}

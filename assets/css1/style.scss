@@ -1,0 +1,120 @@
+@import "vars";
+@import "color-scheme";
+@import "device-width";
+@import "menu";
+@import "img-container";
+@import "volume";
+@import "keyboard";
+
+* {
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1rem;
+}
+
+
+
+.codec {
+  margin: 2em;
+}
+
+
+input[type="radio"] {
+  display: none;
+}
+
+
+
+.opacity-40 {
+  opacity: $opacity40;
+
+}
+
+.block {
+  display:block;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  padding-top: 1em;
+}
+
+
+.flex-v {
+  display:flex;
+  flex-direction: column;
+}
+
+.w100 {
+  width:100%;
+}
+
+
+.m2 {
+  margin: 0 2px;
+}
+.mt4 {
+  margin-top:4px;
+}
+.fs-60 {
+  font-size: $fs-60;
+}
+.fs-70 {
+  font-size: $fs-70;
+}
+.fs-80 {
+  font-size: $fs-80;
+}
+.fright {
+  float: right;
+}
+
+#url {
+  visibility: hidden;
+  text-align:right;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+h1{
+  font-size:$fs-110;
+}
+h2{
+  font-size: $fs-90;
+}
+p {
+  font-size: $fs-90;
+}
+
+.tableImport{
+  border-collapse: collapse;
+  font-size: $fs-80;
+  .value {
+    font-family: 'Courier New', Courier, monospace;
+    padding-left: 1em;
+  }
+}
+
+.w120 {
+  width: $w120;
+}
+
+
+.warn {
+  color: $color-warn;
+  background-color: $background-warn;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+
+@import "modal";
+@import "datalist";

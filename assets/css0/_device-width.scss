@@ -1,0 +1,35 @@
+@media screen and (max-width: 640px) {
+    .container, .modal-content, .codec{
+        width:100%;
+        position:relative;
+    }
+    .rstation {
+      position: absolute;
+      font-size: $fs-40;
+      color: $color-dark;
+      max-width:15%;
+    }
+    .key-wrapper{
+      width: 11%;
+    }
+  }
+  @media screen and (min-width: 641px) {
+    .container, .modal-content{
+        max-width:810px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .codec{
+      max-width:810px;
+      margin:0 auto;
+    }
+    .rstation {
+      position: absolute;
+      font-size: $fs-60;
+      color: $color-dark;
+      max-width:15%;
+    }
+    .key-wrapper {
+      width: 7%;
+    }
+  }
