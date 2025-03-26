@@ -23,7 +23,7 @@ function lang($key) {
         "web_server_account" => "Web server account",
         "no_csv_file" => "No csv file",
         "storage_folder" => "Storage folder",
-        "storage_description" => "The storage folder is defined by the variable <code>\$streams_csv</code> in the file <code>config.php</code>.",
+        "storage_description" => "The storage folder is defined by the variable <code>\$_streams_csv</code> in the file <code>config.php</code>.",
         "install" => "Installation",
         "error" => "Error",
         "play_error" => "Cannot play stream.",

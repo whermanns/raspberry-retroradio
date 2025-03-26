@@ -260,7 +260,7 @@ sudo service smbd restart
 #### Extract Package into `/var/www/html`
 
 ```shell
-sudo tar vxf retroradio-yyyy-mm-dd.tar.gz -C /var/www/html
+sudo unzip raspberry-retroradio-main.zip -d /var/www/html
 ```
 
 ---

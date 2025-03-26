@@ -258,7 +258,7 @@ sudo service smbd restart
 #### Paket in den Ordner /var/www/html entpacken
 
 ```shell
-sudo tar vxf retroradio-yyyy-mm-dd.tar.gz -C /var/www/html
+sudo unzip raspberry-retroradio-main.zip -d /var/www/html
 ```
 
 ---
