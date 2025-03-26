@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Retro Radio
 
 
@@ -347,3 +348,12 @@ The rest is self-explanatory. Just try it out. 😀
 ---
 Author: _Walter Hermanns, 2025_
 
+=======
+Further informations see:
+
+https://github.com/whermanns/raspberry-retroradio/wiki
+
+https://github.com/whermanns/raspberry-retroradio/blob/main/readme-de.md
+
+https://github.com/whermanns/raspberry-retroradio/blob/main/readme-en.md
+>>>>>>> 7c57c419a13bbbdf6d0d30468b8968602a6e9032
