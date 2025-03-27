@@ -70,11 +70,11 @@ function getLangFile($lang) {
             $fn = '/etc/locale.gen';
             if (is_file($fn)) {
                 $f = file_get_contents($fn);
-                // Read the first two letters of the active language setting
-                $r = '/^(\w{2})/m';
+                // Grep active language setting
+                $r = '/^([a-z]*)\_/m';
                 // If several are activated, the language found first is used
                 preg_match($r, $f, $m);
-                $l = $m[0];
+                $l = $m[1];
             }
             break;
         default:
