@@ -26,6 +26,7 @@ const impModal = gE("#importModal");
 const frmImport = gE("#frmImport");
 const helpModal = gE("#helpModal");
 const aboutModal = gE("#aboutModal");
+const volume = gE("#volume");
 const csvFn = gE("#csvFn");
 const drop = gE("#drop");
 const codec = gE("#codec");
@@ -226,14 +227,29 @@ btnImport.addEventListener("click",()=>{
 })
 
 
-// Scheme, volume
+// Scheme
 gE("#scheme").addEventListener("change",()=>{
   frm.submit();
 })
 
-gE("#volume").addEventListener("change",()=>{
-  frm.submit();
+
+// Volume
+volume.addEventListener("change",()=>{
+   frm.submit();
 })
+
+volume.addEventListener("wheel",(e)=>{
+  let v = volume.value;
+  if (e.deltaY < 0 && v < 100) {
+      v++;
+  }
+  if (e.deltaY > 0 && v > 0) {
+      v--;
+  }
+  volume.value = v;
+},{passive: false})
+
+volume.addEventListener("mouseleave",()=>frm.submit());
 
 
 // Codec infos
