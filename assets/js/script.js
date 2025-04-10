@@ -234,22 +234,24 @@ gE("#scheme").addEventListener("change",()=>{
 
 
 // Volume
-volume.addEventListener("change",()=>{
-   frm.submit();
-})
+function changeVol() {
+    frm.submit();
+}
+
+['change','mouseleave'].forEach(evt => {
+	volume.addEventListener(evt, changeVol, false);
+});
 
 volume.addEventListener("wheel",(e)=>{
-  let v = volume.value;
-  if (e.deltaY < 0 && v < 100) {
-      v++;
+  let _v = volume.value;
+  if (e.deltaY < 0 && _v < 100) {
+      _v++;
   }
-  if (e.deltaY > 0 && v > 0) {
-      v--;
+  if (e.deltaY > 0 && _v > 0) {
+      _v--;
   }
-  volume.value = v;
-},{passive: false})
-
-volume.addEventListener("mouseleave",()=>frm.submit());
+  volume.value = _v;
+},{passive: true})
 
 
 // Codec infos
