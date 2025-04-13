@@ -235,7 +235,10 @@ gE("#scheme").addEventListener("change",()=>{
 
 // Volume
 function changeVol() {
-    frm.submit();
+    gE("#show-vol").innerText = volume.value;
+    if (volVal != volume.value) {
+      frm.submit();
+    }
 }
 
 ['change','mouseleave'].forEach(evt => {
@@ -250,6 +253,7 @@ volume.addEventListener("wheel",(e)=>{
   if (e.deltaY > 0 && _v > 0) {
       _v--;
   }
+  gE("#show-vol").innerText = _v;
   volume.value = _v;
 },{passive: true})
 

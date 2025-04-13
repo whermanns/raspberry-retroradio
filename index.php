@@ -7,7 +7,7 @@ Walter Hermanns, 2025
 
 
 // Version
-$_version = "1.0.2<br>2025-04-10";
+$_version = "1.0.3<br>2025-04-13";
 
 
 // Prevent direct call of included php files
@@ -169,6 +169,7 @@ const srv='<?php echo $_srv?>';
 const scheme=<?php echo $scheme?>;
 const prevKey=<?php echo $prevKey?>;
 const key=<?php echo $key?>;
+const volVal=<?php echo $volume?>;
 const csvContent=<?php echo $streamlist->get_streamlist()?>;
 </script>
 <script src="assets/js/script.js"></script>

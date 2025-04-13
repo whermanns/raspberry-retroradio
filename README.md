@@ -259,9 +259,7 @@ sudo service smbd restart
 
 #### Extract Package into `/var/www/html`
 
-```shell
-sudo unzip raspberry-retroradio-main.zip -d /var/www/html
-```
+
 
 ---
 
