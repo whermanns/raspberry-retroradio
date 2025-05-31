@@ -17,6 +17,10 @@ $_streams_csv = "streams.csv";
 // $_streams_csv = "/tmp/streams.csv";
 
 
+// Folder for recordings
+$_recordDir = "/freigabe/record";
+
+
 // csv separator
 $_csv_separator = ",";
 

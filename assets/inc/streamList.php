@@ -42,6 +42,7 @@ class streamList
             }
             fclose($h);
         }
+
         $this->streamlist = $streams;
     }
     

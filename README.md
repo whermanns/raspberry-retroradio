@@ -37,7 +37,7 @@ This project realizes a web radio based on a Raspberry Pi 3 or 4, which is opera
 * Additional languages can be easily added
   * E.g., copy `assets/lang/en.php` to `assets/lang/fr.php` and adapt it
   * Define the language in `config.php`
-
+* **NEW in version 1.2**: Record radio stream
 ---
 
 ## Installation Guide

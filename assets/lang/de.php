@@ -15,6 +15,7 @@ function lang($key) {
         "close" => "Schließen",
         "cancel" => "Abbrechen",
         "help" => "Hilfe",
+        "record" => "Aufnahme",
         "export" => "Exportieren",
         "import" => "Importieren",
         "export_list" => "Senderliste exportieren",

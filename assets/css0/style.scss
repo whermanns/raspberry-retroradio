@@ -5,6 +5,7 @@
 @import "img-container";
 @import "volume";
 @import "keyboard";
+@import "record";
 
 * {
   box-sizing:border-box;
@@ -20,9 +21,9 @@ body{
   margin: 2em;
 }
 
-input[type="radio"] {
-  display: none;
-}
+// input[type="radio"] {
+//   display: none;
+// }
 
 .block {
   display:block;

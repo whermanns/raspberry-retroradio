@@ -32,6 +32,8 @@ const drop = gE("#drop");
 const codec = gE("#codec");
 const siriusImg = gE("#sirius-img");
 const imgC = gE(".img-container");
+const record = gE("#record");
+const imgRec = gE("#img-record");
 const search = gE("#search");
 const vorschlag = gE("#vorschlag");
 const stationIndex = gE("#stationIndex");
@@ -232,6 +234,22 @@ gE("#scheme").addEventListener("change",()=>{
   frm.submit();
 })
 
+// Recording
+record.addEventListener("click",()=>{
+  if (recordV == 1) {
+    record.value = 0;
+  } else {
+    record.value = 1;
+  }
+  frm.submit();
+})
+
+imgRec.addEventListener("mousedown",()=> {
+  imgRec.classList.remove("shadow");
+})
+imgRec.addEventListener("mouseup",()=> {
+  imgRec.classList.add("shadow");
+})
 
 // Volume
 function changeVol() {

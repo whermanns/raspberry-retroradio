@@ -53,7 +53,7 @@ CSS Deklaratios -> _modal.scss
     $grayscale = "";
   }
 ?>
-<div id='menu-icon' class="shadow">
+<div id="menu-icon" class="shadow">
 <?php
 switch ($scheme) {
     case 0:

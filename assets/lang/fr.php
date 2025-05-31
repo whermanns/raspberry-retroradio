@@ -15,6 +15,7 @@ function lang($key) {
         "close" => "Fermer",
         "cancel" => "Abandon",
         "help" => "Aide",
+        "record" => "Capture",
         "export" => "Export",
         "import" => "Importer",
         "export_list" => "Exporter la liste des stations",

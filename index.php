@@ -7,7 +7,7 @@ Walter Hermanns, 2025
 
 
 // Version
-$_version = "1.0.3<br>2025-04-13";
+$_version = "1.2.0<br>2025-05-30";
 
 
 // Prevent direct call of included php files
@@ -102,7 +102,7 @@ require "assets/inc/streamList.php";
 // Play audio stream
 require "assets/inc/playStream.php";
 
-$playS = new playStream($_user, $_password);
+$playS = new playStream($_user, $_password, $_recordDir);
 
 $_loginOk = $playS->loginOk;
 if (!$_loginOk) {
@@ -118,13 +118,14 @@ require "assets/inc/handleRequest.php";
 require "assets/inc/csvUpload.php";
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo lang('lang')?>">
+<html lang="<?php echo lang('lang')?>" translate="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Retro-Radio">
     <meta name="keywords" content="Internetradio, Webradio">
     <meta name="author" content="Walter Hermanns, 2025">
+    <meta name="google" content="notranslate" />
     <title>Retroradio</title>
     <link rel="stylesheet" href="assets/css<?php echo $scheme;?>/style.min.css">
     <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
@@ -163,6 +164,7 @@ if ($alert_msg != "") {
 </div>
 <script>
 const loginOk='<?php echo $_loginOk; // Pass PHP variables to JavaScript?>';
+const recordV = '<?php echo intval($record)?>';
 const url='<?php echo $_SESSION['url'];?>';
 const csvName='<?php echo $_streams_csv?>';
 const srv='<?php echo $_srv?>';

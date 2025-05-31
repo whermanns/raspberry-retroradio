@@ -62,6 +62,15 @@ if (!isset($_SESSION['prevKey'])) {
 }
 $prevKey = $_SESSION['prevKey'];
 
+// RECORD
+$record = $_POST['record'] ?? 0;
+if ($key == 0 or $key != $prevKey) {
+    $record = 0;
+}
+
+
+// RECORD
+
 
 // Evaluate direct selection and convert into key commands
 // Line no. in the CSV file
@@ -80,6 +89,17 @@ if ($useStationIndex == 1) {
 
 
 // Read stream list from CSV file
+/*
+Array
+(
+    [nr] => Array
+        (
+            [0] => station
+            [1] => url
+        )
+    ...
+}
+*/
 $streams = json_decode($streamlist->get_grouped_streams($group - 1));
 
 if (isset($key)) {
@@ -89,7 +109,7 @@ if (isset($key)) {
     if ($_play_key_click && !$volChanged) {
         // Play key click only when key is pressed
         if ($key != $sD->get('key')) {
-            $playS->playStream("$_srv/assets/audio/".$_schemes[$scheme][1], "--gain 0.4" );
+            $playS->playStream("$_srv/assets/audio/".$_schemes[$scheme][1], 40 );
             usleep(5E5);
         }
     }
@@ -105,11 +125,12 @@ if (isset($key)) {
         if (!$volChanged) {
             $i = $key - 1;
             if ((isset($streams[$i]) && count($streams[$i]) > 1)) {
+                $station = trim($streams[$i][0]);
                 $url = trim($streams[$i][1]);
                 $_SESSION['url'] = $url;
                 if ($key != $_SESSION['prevKey'] or $group != $sD->get('group')) {
                     $station = $streams[$i][0];
-                    if (!$playS->playStream($url, "--gain 1")) {
+                    if (!$playS->playStream($url, 100)) {
                         $_SESSION['url'] = "";
                         $alert_msg = lang("play_error");
                     } else {
@@ -118,6 +139,24 @@ if (isset($key)) {
                 }
             }
         }
+
+        switch ($record) {
+            case 1:
+                if ($sD->get("record") != 1) {
+                    $playS->recordStream($station, $url);
+                }
+                $sD->set("record", 1);
+                break;
+            case 0:
+                if ($sD->get("record") != 0) {
+                    $playS->killFfmpeg();
+                }
+                $sD->set("record", 0);
+                break;
+        }
+        $sD->set("record", $record);
+
+
     } else {
         $playS->killVlc();
         $_SESSION['url'] = "";

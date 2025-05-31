@@ -15,6 +15,7 @@ function lang($key) {
         "close" => "Close",
         "cancel" => "Cancel",
         "help" => "Help",
+        "record" => "Record",
         "export" => "Export",
         "import" => "Import",
         "export_list" => "Export station list",

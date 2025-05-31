@@ -1,6 +1,6 @@
 
 #menu-icon {
-    z-index: 2;
+    z-index: 3;
     position: absolute;
     top: 4px;
     left: 8px;
@@ -22,8 +22,8 @@
 
 #menu-items {
     position:absolute;
-    z-index: 1;
-    top:16px;
+    z-index: 2;
+    top:4px;
     left:48px;
     height:0;
     display: block;

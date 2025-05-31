@@ -25,6 +25,7 @@ class storeData {
             $this->data["scheme"] = 0;
             $this->data["volume"] = 30;
             $this->data["key"] = 0;
+            $this->data["record"] = 0;
             $this->data["group"] = 1;
             file_put_contents($this->fn, json_encode($this->data));
         } else {

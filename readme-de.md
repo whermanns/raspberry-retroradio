@@ -37,6 +37,7 @@ Dieses Projekt realisiert ein Webradio auf Basis eines Raspberry Pi 3 oder 4. Di
 * Weitere Sprachen können leicht hinzugefügt werden
   * Z.B. die Datei `assets/lang/en.php` nach `assets/lang/fr.php` kopieren und diese anpassen
   * Sprache in der Datei `config.php` eintragen
+* **NEU in Version 1.2**: Radiosstream aufnehmen
  
 ---
 

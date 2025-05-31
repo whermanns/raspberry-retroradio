@@ -3,7 +3,7 @@ defined('_RETRO_RADIO') or die ('Restricted access');
 
 class playStream {
 
-    private $su;
+    private $su, $recordDir;
 
     private $audioTypes = [".mp3", ".wav", ".aac", "flac", ".ogg", ".wma", ".m4a", "opus", ".mid", "midi", "ape"];
 
@@ -11,11 +11,33 @@ class playStream {
     public $loginOk = false;
 
 
-    public function __construct($user, $password) {
+    public function __construct($user, $password, $recordDir = "/tmp") {
         $this->su = "$password | su $user";
         $this->checkLogin($user);
+        if (substr($recordDir, -1, 1) != "/") {
+            $recordDir = "$recordDir/";
+        }
+        $this->recordDir = $recordDir;
     }
 
+    private function killProcess($p) {
+        if ($this->loginOk) {
+            $pid = exec("pgrep $p");
+            while ($pid != "") {
+                exec("echo {$this->su} -c 'pkill $p'");
+                $pid = exec("pgrep $p");
+            }
+        }
+    }
+
+    
+    public function killVlc () {
+        $this->killProcess("vlc");
+    }
+
+    public function killFFmpeg () {
+        $this->killProcess("ffmpeg");
+    }
 
 
     public function checkLogin($user) {
@@ -27,16 +49,6 @@ class playStream {
         exec("echo {$this->su} -c '/usr/bin/amixer set Master $vol%'");
     }
 
-
-    public function killVlc () {
-        if ($this->loginOk) {
-            $pid = exec("pgrep vlc");
-            while ($pid != "") {
-                exec("echo {$this->su} -c 'pkill vlc'");
-                $pid = exec("pgrep vlc");
-            }
-        }
-    }
 
 
     public function playList($stream) {
@@ -84,8 +96,39 @@ class playStream {
         return $playlist;
     }
 
+    private function localTime() {
+        $timezone = trim(file_get_contents("/etc/timezone"));
+        date_default_timezone_set('UTC');
+        $new_date = new DateTime(date("Y-m-d h:i:s"));
+        $new_date->setTimeZone(new DateTimeZone($timezone));
+        return $new_date->format("ymd-his");
+    }
+    
+    public function recordStream ($station , $stream = "") {
+        if ($this->loginOk) {
+            $this->killFfmpeg();
+            if ($stream != "") {
+                if (!is_dir($this->recordDir)) {
+                    $cmnd = "echo {$this->su} -c 'mkdir -p {$this->recordDir}'";
+                    exec($cmnd);
 
-    public function playStream ($stream, $params = "") {
+                }
+                $cmnd = "echo {$this->su} -c 'chmod 0777 {$this->recordDir}'";
+                exec($cmnd);
+
+                $fn = $this->recordDir . trim(substr($station,0,5)) . "-" . $this->localTime() . ".mp3";
+                $no_msg = "> /dev/null &";
+                $cmnd = "echo {$this->su} -c 'ffmpeg -i $stream $fn $no_msg'";
+                exec($cmnd);
+                sleep(1);
+                $cmnd = "echo {$this->su} -c 'chmod 0666 {$fn}'";
+                exec($cmnd);
+            }
+        }
+    }
+
+
+    public function playStream ($stream, $vol = "1") {
 
         $this->killVlc();
         $cvlc = '/usr/bin/cvlc';
@@ -117,6 +160,8 @@ class playStream {
             //  Volume (0 .. 8)
             //  Default:  "--gain 1";
 
+            $params = "--gain " . $vol / 100;
+
             $no_msg = "> /dev/null &";
 
             // Play audio stream
@@ -128,8 +173,11 @@ error. Workaround: The semicolon is replaced by a colon.
             if (substr($stream, -1, 1) == ";") {
                 $stream = strtr($stream, ";" , ":");
             }
+
+            // ffplay can't play playlists, but vlc can.
+            //$cmnd = "echo {$this->su} -c 'ffplay -nodisp -volume $vol $stream $no_msg'";
             $cmnd = "echo {$this->su} -c '$cvlc $params $stream $no_msg'";
-     
+
             if ($this->loginOk) {
                 exec($cmnd, $output, $result);
             }

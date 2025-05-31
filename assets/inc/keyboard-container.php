@@ -1,7 +1,24 @@
 <?php
 defined('_RETRO_RADIO') or die ('Restricted access');
 
-echo "<div><div  id='keyboard'>\n";
+echo "<div>\n";
+
+echo "<div class='record'>";
+
+switch ($record) {
+    case 1:
+        $recordImg = "tape-r-ani.webp";
+        echo "<div id='recCaption'>".lang('record')."</div>\n";
+        break;
+    default:
+        $recordImg = "tape.webp";
+}
+
+echo "<label for='record'><input class='display-none' type='text' value='$record' id='record' name='record'>";
+echo "<img id='img-record' class='shadow' src='assets/img/$recordImg' alt='Record'></label>\n</div>\n";
+
+
+echo "<div id='keyboard' class='notranslate'>\n";
 
 // Station selection buttons
 
@@ -23,9 +40,9 @@ for ($i=0; $i<=8; $i++) {
                     $title = "";
                 }
             }
-            echo "<div class='key-wrapper'><div class='key-caption'>$title</div>\n";
+            echo "<div class='key-wrapper'><div class='key-caption notranslate'>$title</div>\n";
             echo "<div class='key-inside'>\n";
-            echo "<input type='radio' name='key' class='key' id='key$i' $chk value='$i'>\n";
+            echo "<input type='radio' name='key' class='key display-none' id='key$i' $chk value='$i'>\n";
             echo "<label for='key$i' id='lbl$i'><span class='klbl'></span></label>\n";
             echo "</div></div>\n";
         break;
