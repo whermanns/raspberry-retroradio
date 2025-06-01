@@ -114,9 +114,12 @@ class playStream {
 
                 }
                 $cmnd = "echo {$this->su} -c 'chmod 0777 {$this->recordDir}'";
-                exec($cmnd);
-
-                $fn = $this->recordDir . trim(substr($station,0,5)) . "-" . $this->localTime() . ".mp3";
+                
+                $station = substr($station, 0, 5);
+                $re = '/\s/m';
+                $subst = "_";
+                $station = preg_replace($re, $subst, $station);
+                $fn = $this->recordDir . $station . "-" . $this->localTime() . ".mp3";
                 $no_msg = "> /dev/null &";
                 $cmnd = "echo {$this->su} -c 'ffmpeg -i $stream $fn $no_msg'";
                 exec($cmnd);
