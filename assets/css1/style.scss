@@ -16,18 +16,9 @@ body{
   font-size: 1rem;
 }
 
-
-
 .codec {
   margin: 2em;
 }
-
-
-// input[type="radio"] {
-//   display: none;
-// }
-
-
 
 .opacity-40 {
   opacity: $opacity40;
@@ -83,6 +74,11 @@ body{
 
 .pointer {
   cursor: pointer;
+}
+
+.bd {
+  border:.2px solid #aaa;
+  border-radius: 2px;
 }
 
 h1{
