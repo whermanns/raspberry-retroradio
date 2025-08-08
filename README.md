@@ -18,7 +18,7 @@ This project realizes a web radio based on a Raspberry Pi 3 or 4, which is opera
 * Virtually unlimited number of stations
 * Stations are provided via a simple structured CSV file
 * Import and export CSV file
-* Example file with approximately 70 radio stations
+* Example file with more than 80 radio / TV stations 
 * Customizable station list
 * Intuitive station selection
   * Select a group and click on a station or
@@ -38,6 +38,7 @@ This project realizes a web radio based on a Raspberry Pi 3 or 4, which is opera
   * E.g., copy `assets/lang/en.php` to `assets/lang/fr.php` and adapt it
   * Define the language in `config.php`
 * **NEW in version 1.2**: Record radio stream
+* **NEW in version 1.4**: Play audio from TV stream
 ---
 
 ## Installation Guide
@@ -317,6 +318,12 @@ $_streams_csv = "streams.csv";
 // $_streams_csv = "/share/streams.csv";
 // $_streams_csv = "/tmp/streams.csv";
 ```
+
+#### Set audio delay when playing a TV stream
+````conf
+// Audio delay (ms)
+$_audio_delay = 1300;
+````
 
 **Important:** The web server account `www-data` must have read/write permissions for this folder.
 

@@ -109,7 +109,7 @@ if (isset($key)) {
     if ($_play_key_click && !$volChanged) {
         // Play key click only when key is pressed
         if ($key != $sD->get('key')) {
-            $playS->playStream("$_srv/assets/audio/".$_schemes[$scheme][1], 40 );
+            $playS->playStream("$_srv/assets/audio/".$_schemes[$scheme][1], 40 , 0);
             usleep(5E5);
         }
     }
@@ -130,7 +130,7 @@ if (isset($key)) {
                 $_SESSION['url'] = $url;
                 if ($key != $_SESSION['prevKey'] or $group != $sD->get('group')) {
                     $station = $streams[$i][0];
-                    if (!$playS->playStream($url, 100)) {
+                    if (!$playS->playStream($url, 100, $_audio_delay)) {
                         $_SESSION['url'] = "";
                         $alert_msg = lang("play_error");
                     } else {

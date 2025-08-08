@@ -7,7 +7,7 @@ Walter Hermanns, 2025
 
 
 // Version
-$_version = "1.2.2<br>2025-06-08";
+$_version = "1.4<br>2025-08-08";
 
 
 // Prevent direct call of included php files
@@ -16,7 +16,6 @@ define('_RETRO_RADIO', 1);
 
 // Read configuration
 require "config.php";
-
 
 if ($_DISPLAY_ERRORS) {
     ini_set("display_errors", 1);
@@ -32,6 +31,10 @@ session_start([
     "use_strict_mode" => 0
 ]);
 
+// Latency
+if (!isset($_audio_delay)) {
+    $_audio_delay = 1300;
+}
 
 // Read session data
 require "assets/inc/storeData.php";

@@ -34,3 +34,5 @@ $_play_key_click = true;
 // Language: auto, de, en, fr
 $_lang = "auto";
 
+// Audio delay (ms)
+$_audio_delay = 1300;

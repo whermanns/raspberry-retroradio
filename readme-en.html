@@ -27,7 +27,7 @@
 	<li>Virtually unlimited number of stations</li>
 	<li>Stations are provided via a simple structured CSV file</li>
 	<li>Import and export CSV file</li>
-	<li>Example file with approximately 70 radio stations</li>
+	<li>Example file with more than 80 radio / TV stations </li>
 	<li>Customizable station list</li>
 	<li>Intuitive station selection<ul>
 	<li>Select a group and click on a station or</li>
@@ -42,7 +42,6 @@
 	<li>Phillips Sirius BD431A<ul>
 	<li>Slideshow of the disassembled, unrestored radio</li>
 	</ul>
-	<li><b>NEW in version 1.2</b>: Record radio Stream</li>
 	</li>
 	<li>Saba Donau F<ul>
 	<li>Animation of the station display on the scale</li>
@@ -57,6 +56,8 @@
 	<li>Define the language in <code>config.php</code></li>
 	</ul>
 	</li>
+	<li><strong>NEW in version 1.2</strong>: Record radio stream</li>
+	<li><strong>NEW in version 1.4</strong>: Play audio from TV stream</li>
 	</ul>
 	<hr>
 	<h2 id="installation-guide">Installation Guide</h2>
@@ -171,18 +172,18 @@
 	</code></pre>
 	<p>Append the following lines to the end of the file</p>
 	<pre><code class="lang-conf">[share]
-	   <span class="hljs-keyword">comment</span> = <span class="hljs-keyword">Share</span>
-	   <span class="hljs-keyword">create</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
-	   <span class="hljs-keyword">directory</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
-	   <span class="hljs-keyword">force</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0766</span>
-	   <span class="hljs-keyword">force</span> <span class="hljs-keyword">directory</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0777</span>
-	   guest ok = yes
-	   browseable = yes
-	   <span class="hljs-keyword">read</span> <span class="hljs-keyword">only</span> = <span class="hljs-keyword">no</span>
-	   vfs objects = <span class="hljs-keyword">recycle</span>
-	   <span class="hljs-keyword">recycle</span>:<span class="hljs-keyword">exclude</span> = *.tmp, *.bak
-	   <span class="hljs-keyword">recycle</span>:keeptree = yes
-	   <span class="hljs-keyword">recycle</span>:repository = RecycleBin
+	<span class="hljs-keyword">comment</span> = <span class="hljs-keyword">Share</span>
+	<span class="hljs-keyword">create</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
+	<span class="hljs-keyword">directory</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
+	<span class="hljs-keyword">force</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0766</span>
+	<span class="hljs-keyword">force</span> <span class="hljs-keyword">directory</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0777</span>
+	guest ok = yes
+	browseable = yes
+	<span class="hljs-keyword">read</span> <span class="hljs-keyword">only</span> = <span class="hljs-keyword">no</span>
+	vfs objects = <span class="hljs-keyword">recycle</span>
+	<span class="hljs-keyword">recycle</span>:<span class="hljs-keyword">exclude</span> = *.tmp, *.bak
+	<span class="hljs-keyword">recycle</span>:keeptree = yes
+	<span class="hljs-keyword">recycle</span>:repository = RecycleBin
 	</code></pre>
 	<h4 id="create-samba-user">Create Samba User</h4>
 	<pre><code class="lang-shell"># Create user retroradio <span class="hljs-keyword">and</span> <span class="hljs-keyword">set</span> password
@@ -236,6 +237,10 @@
 	<span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"streams.csv"</span>;
 	<span class="hljs-regexp">//</span> <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"/share/streams.csv"</span>;
 	<span class="hljs-regexp">//</span> <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"/tmp/streams.csv"</span>;
+	</code></pre>
+	<h4 id="set-audio-delay-when-playing-a-tv-stream">Set audio delay when playing a TV stream</h4>
+	<pre><code class="lang-conf"><span class="hljs-regexp">//</span> Audio delay (ms)
+	<span class="hljs-variable">$_audio_delay</span> = <span class="hljs-number">1300</span>;
 	</code></pre>
 	<p><strong>Important:</strong> The web server account <code>www-data</code> must have read/write permissions for this folder.</p>
 	<h5 id="set-up-access-to-shared-folders">Set up access to shared folders</h5>

@@ -131,8 +131,7 @@ class playStream {
     }
 
 
-    public function playStream ($stream, $vol = "1") {
-
+    public function playStream ($stream, $vol = "1", $_audio_delay) {
         $this->killVlc();
         $cvlc = '/usr/bin/cvlc';
 
@@ -162,8 +161,16 @@ class playStream {
             // https://wiki.videolan.org/VLC_command-line_help/
             //  Volume (0 .. 8)
             //  Default:  "--gain 1";
+            //
+            // Disable video output
+            // --no-video
 
-            $params = "--gain " . $vol / 100;
+            $params = "--gain " . $vol / 100 . " --no-video";
+
+            // Delay audio when playing a TV stream
+            if ($_audio_delay > 0 && substr($stream, -4) == "m3u8") {
+                $params .= " --audio-desync $_audio_delay";
+            }
 
             $no_msg = "> /dev/null &";
 

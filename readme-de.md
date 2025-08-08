@@ -18,7 +18,7 @@ Dieses Projekt realisiert ein Webradio auf Basis eines Raspberry Pi 3 oder 4. Di
 * Senderanzahl praktisch nicht begrenzt
 * Sender werden durch eine einfach strukturierte CSV-Datei bereitgestellt
 * CSV-Datei importieren und exportieren
-* Beispieldatei mit ca. 70 Radiostationen
+* Beispieldatei mit mehr als 80 Radio-/TV-Stationen
 * Senderliste nach eigenen Wünschen anpassbar
 * Intuitive Senderwahl
   * Gruppe auswählen und Sender anklicken oder
@@ -38,6 +38,7 @@ Dieses Projekt realisiert ein Webradio auf Basis eines Raspberry Pi 3 oder 4. Di
   * Z.B. die Datei `assets/lang/en.php` nach `assets/lang/fr.php` kopieren und diese anpassen
   * Sprache in der Datei `config.php` eintragen
 * **NEU in Version 1.2**: Radiosstream aufnehmen
+* **NEU in Version 1.4**: Audio von TV-Sendern abspielen
  
 ---
 
@@ -316,6 +317,12 @@ $_streams_csv = "streams.csv";
 // $_streams_csv = "/freigabe/streams.csv";
 // $_streams_csv = "/tmp/streams.csv";
 ```
+
+#### Audio Verzögerung beim Abspielen eines TV-Streams
+````conf
+// Audio delay (ms)
+$_audio_delay = 1300;
+````
 
 **Wichtig:** Das Konto des Webservers `www-data` muss
 Lese- und Schreibrechte in diesem Ordner haben.

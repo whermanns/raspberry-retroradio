@@ -27,7 +27,7 @@
     <li>Senderanzahl praktisch nicht begrenzt</li>
     <li>Sender werden durch eine einfach strukturierte CSV-Datei bereitgestellt</li>
     <li>CSV-Datei importieren und exportieren</li>
-    <li>Beispieldatei mit ca. 70 Radiostationen</li>
+    <li>Beispieldatei mit mehr als 80 Radio-/TV-Stationen</li>
     <li>Senderliste nach eigenen Wünschen anpassbar</li>
     <li>Intuitive Senderwahl<ul>
     <li>Gruppe auswählen und Sender anklicken oder</li>
@@ -55,8 +55,9 @@
     <li>Z.B. die Datei <code>assets/lang/en.php</code> nach <code>assets/lang/fr.php</code> kopieren und diese anpassen</li>
     <li>Sprache in der Datei <code>config.php</code> eintragen</li>
     </ul>
-    <li><b>NEU in Version 1.2</b>: Radiostream aufnehmen</li> 
     </li>
+    <li><strong>NEU in Version 1.2</strong>: Radiosstream aufnehmen</li>
+    <li><strong>NEU in Version 1.4</strong>: Audio von TV-Sendern abspielen</li>
     </ul>
     <hr>
     <h2 id="installationsbeschreibung">Installationsbeschreibung</h2>
@@ -171,18 +172,18 @@
     </code></pre>
     <p>Folgende Zeilen ans Ende der Datei anhängen</p>
     <pre><code class="lang-conf">[freigabe]
-       <span class="hljs-keyword">comment</span> = Freigabe
-       <span class="hljs-keyword">create</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
-       <span class="hljs-keyword">directory</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
-       <span class="hljs-keyword">force</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0766</span>
-       <span class="hljs-keyword">force</span> <span class="hljs-keyword">directory</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0777</span>
-       guest ok = yes
-       browseable = yes
-       <span class="hljs-keyword">read</span> <span class="hljs-keyword">only</span> = <span class="hljs-keyword">no</span>
-       vfs objects = <span class="hljs-keyword">recycle</span>
-       <span class="hljs-keyword">recycle</span>:<span class="hljs-keyword">exclude</span> = *.tmp, *.bak
-       <span class="hljs-keyword">recycle</span>:keeptree = yes
-       <span class="hljs-keyword">recycle</span>:repository = Papierkorb
+    <span class="hljs-keyword">comment</span> = Freigabe
+    <span class="hljs-keyword">create</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
+    <span class="hljs-keyword">directory</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
+    <span class="hljs-keyword">force</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0766</span>
+    <span class="hljs-keyword">force</span> <span class="hljs-keyword">directory</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0777</span>
+    guest ok = yes
+    browseable = yes
+    <span class="hljs-keyword">read</span> <span class="hljs-keyword">only</span> = <span class="hljs-keyword">no</span>
+    vfs objects = <span class="hljs-keyword">recycle</span>
+    <span class="hljs-keyword">recycle</span>:<span class="hljs-keyword">exclude</span> = *.tmp, *.bak
+    <span class="hljs-keyword">recycle</span>:keeptree = yes
+    <span class="hljs-keyword">recycle</span>:repository = Papierkorb
     </code></pre>
     <h4 id="sambabenutzer-anlegen">Sambabenutzer anlegen</h4>
     <pre><code class="lang-shell"><span class="hljs-comment"># Konto retroradio anlegen und Passwort einrichten</span>
@@ -237,6 +238,10 @@
     <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"streams.csv"</span>;
     <span class="hljs-regexp">//</span> <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"/freigabe/streams.csv"</span>;
     <span class="hljs-regexp">//</span> <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"/tmp/streams.csv"</span>;
+    </code></pre>
+    <h4 id="audio-verz-gerung-beim-abspielen-eines-tv-streams">Audio Verzögerung beim Abspielen eines TV-Streams</h4>
+    <pre><code class="lang-conf"><span class="hljs-regexp">//</span> Audio delay (ms)
+    <span class="hljs-variable">$_audio_delay</span> = <span class="hljs-number">1300</span>;
     </code></pre>
     <p><strong>Wichtig:</strong> Das Konto des Webservers <code>www-data</code> muss
     Lese- und Schreibrechte in diesem Ordner haben.</p>

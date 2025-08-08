@@ -334,11 +334,13 @@ function showInfo(i) {
 // Display codec info
 setInterval(()=>{
   if (url != '') {
-    fetch(srv + "/codec.php?url=" + url)
-    .then((response) => response.json())
-    .then((json) => showInfo(json));
+    if (url.slice(-4) != "m3u8") {
+      fetch(srv + "/codec.php?url=" + url)
+      .then((response) => response.json())
+      .then((json) => showInfo(json));
+    }
   }
-}, 5000);
+}, 10000);
 
 
 // Sirius slideshow
