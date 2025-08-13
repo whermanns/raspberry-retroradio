@@ -20,11 +20,12 @@ class playStream {
         $this->recordDir = $recordDir;
     }
 
-    private function killProcess($p) {
+    private function killProcess($p, $usleep = 0) {
         if ($this->loginOk) {
             $pid = exec("pgrep $p");
             while ($pid != "") {
-                exec("echo {$this->su} -c 'pkill $p'");
+                usleep($usleep);
+                exec("echo {$this->su} -c 'pkill -SIGINT $p'");
                 $pid = exec("pgrep $p");
             }
         }
@@ -36,7 +37,7 @@ class playStream {
     }
 
     public function killFFmpeg () {
-        $this->killProcess("ffmpeg");
+        $this->killProcess("ffmpeg", 5e5);
     }
 
 
@@ -49,7 +50,17 @@ class playStream {
         exec("echo {$this->su} -c '/usr/bin/amixer set Master $vol%'");
     }
 
-
+/*
+Some URLs (e.g. http://sc8.radiocaroline.net/;) end with a semicolon. This means that VLC no longer
+is running as a background process and the web server displays the error 504 Gateway Time-out
+error. Workaround: The semicolon is replaced by a colon.
+*/
+    private function replaceSemicolon($stream) {
+        if (substr($stream, -1, 1) == ";") {
+            $stream = strtr($stream, ";" , ":");
+        }
+        return $stream;
+    }
 
     public function playList($stream) {
         $playlist = "";
@@ -111,18 +122,21 @@ class playStream {
                 if (!is_dir($this->recordDir)) {
                     $cmnd = "echo {$this->su} -c 'mkdir -p {$this->recordDir}'";
                     exec($cmnd);
-
                 }
                 $cmnd = "echo {$this->su} -c 'chmod 0777 {$this->recordDir}'";
-                
+                exec($cmnd);                
                 $station = substr($station, 0, 5);
                 $re = '/\s/m';
                 $subst = "_";
                 $station = preg_replace($re, $subst, $station);
                 $fn = $this->recordDir . $station . "-" . $this->localTime() . ".mp3";
                 $no_msg = "> /dev/null &";
+                
+                $stream = $this->replaceSemicolon($stream);
+
                 $cmnd = "echo {$this->su} -c 'ffmpeg -i $stream $fn $no_msg'";
                 exec($cmnd);
+
                 sleep(1);
                 $cmnd = "echo {$this->su} -c 'chmod 0666 {$fn}'";
                 exec($cmnd);
@@ -174,15 +188,9 @@ class playStream {
 
             $no_msg = "> /dev/null &";
 
+            $stream = $this->replaceSemicolon($stream);
+
             // Play audio stream
-/*
-Some URLs (e.g. http://sc8.radiocaroline.net/;) end with a semicolon. This means that VLC no longer
-is running as a background process and the web server displays the error 504 Gateway Time-out
-error. Workaround: The semicolon is replaced by a colon.
-*/
-            if (substr($stream, -1, 1) == ";") {
-                $stream = strtr($stream, ";" , ":");
-            }
 
             // ffplay can't play playlists, but vlc can.
             //$cmnd = "echo {$this->su} -c 'ffplay -nodisp -volume $vol $stream $no_msg'";

@@ -7,7 +7,7 @@ Walter Hermanns, 2025
 
 
 // Version
-$_version = "1.4<br>2025-08-08";
+$_version = "1.4.1<br>2025-08-13";
 
 
 // Prevent direct call of included php files
