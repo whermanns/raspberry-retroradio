@@ -109,10 +109,9 @@ error. Workaround: The semicolon is replaced by a colon.
 
     private function localTime() {
         $timezone = trim(file_get_contents("/etc/timezone"));
-        date_default_timezone_set('UTC');
-        $new_date = new DateTime(date("Y-m-d h:i:s"));
-        $new_date->setTimeZone(new DateTimeZone($timezone));
-        return $new_date->format("ymd-his");
+        date_default_timezone_set($timezone);
+        $new_date = new DateTime(date("Y-m-d H:i:s"));
+        return $new_date->format("ymd-His");
     }
     
     public function recordStream ($station , $stream = "") {
@@ -145,7 +144,7 @@ error. Workaround: The semicolon is replaced by a colon.
     }
 
 
-    public function playStream ($stream, $vol = "1", $_audio_delay) {
+    public function playStream ($stream, $vol = "1", $_audio_delay = 0) {
         $this->killVlc();
         $cvlc = '/usr/bin/cvlc';
 

@@ -31,7 +31,7 @@ class streamList
         $this->separator = $separator;
         $streams = [];
         if (($h = fopen($streams_csv, "r")) !== FALSE) {
-            while (($data = fgetcsv($h, 1000, $this->separator, $this->enclosue)) !== FALSE) {
+            while (($data = fgetcsv($h, 1000, $this->separator, $this->enclosue, "\\")) !== FALSE) {
                 if (count($data) > 1) {
                     $key = trim($data[0]);
                     $val = trim($data[1]);
