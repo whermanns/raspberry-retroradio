@@ -14,6 +14,7 @@ function lang($key) {
         "group" => "Gruppe",
         "close" => "Schließen",
         "cancel" => "Abbrechen",
+        "selTracks" => "Titel auswählen",
         "help" => "Hilfe",
         "record" => "Aufnahme",
         "export" => "Exportieren",
@@ -28,8 +29,6 @@ function lang($key) {
         "install" => "Installation",
         "error" => "Fehler",
         "play_error" => "Kann Stream nicht abspielen.",
-        "create_error" => "Kann Playlist nicht anlegen.",
-        "no_audio_files" => "Keine Audiodateien im Ordner ",
         "import_failed" => "Import fehlgeschlagen.",
         "write_error" => "Schreibfehler im Verzeichnis ",
         "invalid_user" => "Falsche Anmeldedaten, s. config.php",
@@ -39,7 +38,8 @@ function lang($key) {
         "<h1>Hilfe</h1>
 <hr>
 <h2>Format der Senderliste</h2>
-<p>Sender werden zeilenweise in einer csv-Datei (<u>C</u>omma <u>S</u>eparated <u>V</u>alues) wie im folgenden Beispiel gespeichert:
+<p>Sender werden zeilenweise in die Datei <code>streams.csv</code> geschrieben.
+<br>Struktur der csv-Datei (<u>C</u>omma <u>S</u>eparated <u>V</u>alues):
 <pre class='fs-70'>
 NDR 2 SH,https://icecast.ndr.de/ndr/ndr2/schleswigholstein/mp3/128/stream.mp3
 WDR 2,https://wdr-wdr2-rheinland.icecastssl.wdr.de/wdr/wdr2/rheinland/mp3/128/stream.mp3
@@ -49,29 +49,16 @@ also:<br>Sendername,Internetadresse des Radiostreams
 <i><a class='a m2' href='https://fmstream.org/' target='_blank'>fmstream.org</a></i>, 
 <i><a class='a m2' href='https://streamurl.link/' target='_blank'>streamurl.link</a></i>
 <hr>
-<h2>Lokale Audiodatei oder Wiedergabeliste abspielen</h2>
-<p>Einzelne Audiodateien oder Playlists (Dateiendung: .m3u) an die Senderliste anhängen. Dateinamen werden mit absoluten Pfadangaben geschrieben.
+<h2>Lokale Audiodateien abspielen</h2>
+<p>Ordner mit Audiodateien in die Senderliste eintragen.
 Folgende Sonderzeichen dürfen nicht im Dateinamen enthalten sein:
 <br><code>{}|&#38;&#126;:&lt;&gt;*\'&#34;?%@</code>
-<p>Strukur: Titel des Musikstücks oder Albums, vollständiger Dateiname
+<p>Strukur: <code>Titel des Albums,Ordnername</code>
 <pre class='fs-70'>
-So What,/freigabe/Miles Davis/Kind Of Blue/01 So What.mp3
-Kind Of Blue,/freigabe/Miles Davis/Kind Of Blue/kind_of_blue.m3u</pre>
-<hr>
-<h2>Wiedergabeliste erstellen</h2>
-<p>Wird nur der Ordnername angegeben, versucht Retroradio eine Wiedergabeliste 
-namens <code>retroradio.m3u</code> zu erstellen, hinreichende Ordnerrechte vorausgesetzt. Der Eintrag
-<pre class='fs-70'>
-Kind Of Blue,/freigabe/Miles Davis/Kind Of Blue/</pre>
-wird umgewandelt in:<br>
-<pre class='fs-70'>Kind Of Blue,/freigabe/Miles Davis/Kind Of Blue/retroradio.m3u</pre>
-<p>In der Wiedergabeliste stehen die Dateinamen der Musikstücke zeilenweise untereinander, z.B.:
-<pre class='fs-70'>01 So What.mp3
-02 Freddie Freeloader.mp3
-03 Blue In Green.mp3
-04 All Blues.mp3
-05 Flamenco Sketches.mp3
-06 Flamenco Sketches [Alternate].mp3</pre>
+Kind of Blue,/freigabe/Miles Davis/Kind Of Blue
+Creedence Clearwater Revival,/freigabe/CCR
+</pre>
+Jeder Ordner ist einer Senderwahltaste zugeordnet. Im Dialog kann man eine oder mehrere Dateien auswählen.
 <hr>
 <p><button type='button' class='closeD'>Schließen</button>
 <span class='fs-60 fright'>Walter Hermanns, 2025</span>"

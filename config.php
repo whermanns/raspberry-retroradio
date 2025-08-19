@@ -2,7 +2,7 @@
 defined('_RETRO_RADIO') or die ('Restricted access');
 
 // Display errors: true / false
-$_DISPLAY_ERRORS = false;
+$_DISPLAY_ERRORS = true;
 
 
 // User account data
@@ -27,12 +27,14 @@ $_csv_separator = ",";
 
 // Original button sound of the Philips Sirius BD431A radio
 // or Saba Donau f
-// play when changing stations true/false
+// Play when changing stations true/false
 $_play_key_click = true;
 
 
 // Language: auto, de, en, fr
 $_lang = "auto";
 
+
 // Audio delay (ms)
+// This parameter specifies the time offset between video and audio streams.
 $_audio_delay = 1300;

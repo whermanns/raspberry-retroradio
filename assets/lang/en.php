@@ -15,6 +15,7 @@ function lang($key) {
         "close" => "Close",
         "cancel" => "Cancel",
         "help" => "Help",
+        "selTracks" => "Select Song",
         "record" => "Record",
         "export" => "Export",
         "import" => "Import",
@@ -28,8 +29,6 @@ function lang($key) {
         "install" => "Installation",
         "error" => "Error",
         "play_error" => "Cannot play stream.",
-        "create_error" => "Cannot create playlist.",
-        "no_audio_files" => "No audio files in the folder ",
         "import_failed" => "Import failed.",
         "write_error" => "Write error in the directory ",
         "invalid_user" => "Incorrect login data, see config.php",
@@ -39,7 +38,8 @@ function lang($key) {
         "<h1>Help menu</h1>
 <hr>
 <h2>Format of the station list</h2>
-<p>Stations are saved line by line in a csv file (<u>C</u>omma <u>S</u>eparated <u>V</u>alues) as in the following example:
+<p>Stations are written line by line to the <code>streams.csv</code> file.
+<p>Structure of the csv file (<u>C</u>omma <u>S</u>eparated <u>V</u>alues):
 <pre class='fs-70'>
 NDR 2 SH,https://icecast.ndr.de/ndr/ndr2/schleswigholstein/mp3/128/stream.mp3
 WDR 2,https://wdr-wdr2-rheinland.icecastssl.wdr.de/wdr/wdr2/rheinland/mp3/128/stream.mp3
@@ -50,28 +50,15 @@ Station name,Internet address of the radio stream
 <i><a class='a m2' href='https://fmstream.org/' target='_blank'>fmstream.org</a></i>, 
 <i><a class='a m2' href='https://streamurl.link/' target='_blank'>streamurl.link</a></i>
 <hr>
-<h2>Playing a local audio file or playlist</h2>
-<p>Attach individual audio files or playlists (file extension: .m3u) to the station list. File names are written with absolute paths. The following special characters must not be included in the file name:
+<h2>Playing local audio files</h2>
+<p>Add folders containing audio files to the station list.
+The following special characters must not be included in the file name:
 <br><code>{}|&#38;&#126;:&lt;&gt;*\'&#34;?%@</code>
-<p>Structure: Title of the music track or album, full file name
+<p>Structure: <code>Album title,folder name</code>
 <pre class='fs-70'>
-So What,/release/Miles Davis/Kind Of Blue/01 So What.mp3
-Kind Of Blue,/share/Miles Davis/Kind Of Blue/kind_of_blue.m3u</pre>
-<hr>
-<h2>Create playlist</h2>
-<p>If only the folder name is specified, Retroradio attempts to create a playlist called <code>retroradio.m3u</code>, 
-assuming sufficient folder rights. The entry
-<pre class='fs-70'>
-Kind Of Blue,/share/Miles Davis/Kind Of Blue/</pre>
-is converted to:<br>
-<pre class='fs-70'>Kind Of Blue,/share/Miles Davis/Kind Of Blue/retroradio.m3u</pre>
-<p>In the playlist, the file names of the music tracks are listed line by line, e.g:
-<pre class='fs-70'>01 So What.mp3
-02 Freddie Freeloader.mp3
-03 Blue In Green.mp3
-04 All Blues.mp3
-05 Flamenco Sketches.mp3
-06 Flamenco Sketches [Alternate].mp3</pre>
+Kind of Blue,/freigabe/Miles Davis/Kind Of Blue
+Creedence Clearwater Revival,/freigabe/Miles Davis/Kind Of Blue</pre>
+Each folder is assigned to a channel selection button. You can select one or more files in the dialog box.
 <hr>
 <p><button type='button' class='closeD'>Close</button>
 <span class='fs-60 fright'>Walter Hermanns, 2025</span>"

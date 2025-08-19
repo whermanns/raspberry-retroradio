@@ -1,3 +1,5 @@
+@use "vars" as *;
+
 @media screen and (max-width: 640px) {
     .container, .modal-content, .codec{
         width:100%;

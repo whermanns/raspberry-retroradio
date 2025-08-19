@@ -1,11 +1,13 @@
-@import "vars";
-@import "color-scheme";
-@import "device-width";
-@import "menu";
-@import "img-container";
-@import "volume";
-@import "keyboard";
-@import "record";
+@use "vars" as *;
+@use "color-scheme";
+@use "device-width";
+@use "menu";
+@use "img-container";
+@use "volume";
+@use "keyboard";
+@use "record";
+@use "modal";
+@use "datalist";
 
 * {
   box-sizing:border-box;
@@ -76,6 +78,16 @@ body{
   cursor: pointer;
 }
 
+.p4 {
+  padding: 4px;
+}
+
+.btnSubmit {
+    display:block;
+    width: 120px;
+    margin: 4px auto;
+}
+
 .bd {
   border:.2px solid #aaa;
   border-radius: 2px;
@@ -103,7 +115,10 @@ p {
 .w120 {
   width: $w120;
 }
-
+.w240 {
+  min-width: $w120;
+  max-width: $w240;
+}
 
 .warn {
   color: $color-warn;
@@ -112,6 +127,18 @@ p {
   border-radius: 4px;
 }
 
+.coverContent {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color: $modal-bg;
+  opacity: $opacity40;
+  z-index: 10;
+}
 
-@import "modal";
-@import "datalist";
+.pushOver {
+  position:relative;
+  z-index: 12;
+}

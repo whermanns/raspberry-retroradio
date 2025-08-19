@@ -25,7 +25,6 @@ Dieses Projekt realisiert ein Webradio auf Basis eines Raspberry Pi 3 oder 4. Di
   * einen Buchstaben in die Suchleiste eingeben und  Vorschlag auswählen
 * Vom Sender bereitgestellte Informationen anzeigen
 * Lokale bzw. im LAN gespeicherte Streams und Playlists abspielen
-* Playlist automatisch erstellen
 * Logarithmischer Lautstärkesteller
 * Zwei Anzeigeschemas nach historischen Radios
   * Phillips Sirius BD431A
@@ -39,6 +38,7 @@ Dieses Projekt realisiert ein Webradio auf Basis eines Raspberry Pi 3 oder 4. Di
   * Sprache in der Datei `config.php` eintragen
 * **NEU in Version 1.2**: Radiosstream aufnehmen
 * **NEU in Version 1.4**: Audio von TV-Sendern abspielen
+* **Neu in Version 1.6**: Einen oder mehrere Musiktitel aus einem Ordner auswählen
  
 ---
 

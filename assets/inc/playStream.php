@@ -5,7 +5,7 @@ class playStream {
 
     private $su, $recordDir;
 
-    private $audioTypes = [".mp3", ".wav", ".aac", "flac", ".ogg", ".wma", ".m4a", "opus", ".mid", "midi", "ape"];
+    private $audioTypes = [".mp3", ".wav", ".aac", "flac", ".ogg", ".wma", ".m4a", "opus", ".mid", "midi", ".ape"];
 
 
     public $loginOk = false;
@@ -62,50 +62,6 @@ error. Workaround: The semicolon is replaced by a colon.
         return $stream;
     }
 
-    public function playList($stream) {
-        $playlist = "";
-        if (substr($stream,-1,1) !="/") {
-            $stream .= "/";
-        }
-        $plRetroradio = $stream ."retroradio.m3u";
-
-        if (is_file($plRetroradio)) {
-            $playlist = $plRetroradio;
-        } else {
-            $re = '/[{}|&#"%~:<>*\'?]/m';
-            $files = scandir($stream);
-            $audioFiles = [];
-            $audioTypes = $this->audioTypes;
-            for ($i = 0; $i < count($files); $i++) {
-                if (substr($files[$i],0,1) != "." &&
-                in_array(substr($files[$i],-4), $audioTypes)) {
-                    preg_match_all($re, $files[$i], $matches, PREG_SET_ORDER);
-                    if (count($matches) == 0) {
-                        $audioFiles[] = $files[$i];
-                    }
-                }
-                $playlist = implode("\n", $audioFiles) ."\n";
-            }
-            $playlistExists = false;
-            if ($playlist != "") {
-                try {
-                    file_put_contents($plRetroradio, $playlist);
-                    chmod ($plRetroradio, 0666);
-                    $playlistExists = true;
-                } catch (Exception $e) {
-                    $playlistExists = false;
-                    $alert_msg = lang("create_error");
-                }
-            } else {
-                $alert_msg = lang("no_audio_files") . $stream;
-            }
-            if ($playlistExists) {
-                $playlist = $plRetroradio;
-            }
-        }
-
-        return $playlist;
-    }
 
     private function localTime() {
         $timezone = trim(file_get_contents("/etc/timezone"));
@@ -114,6 +70,7 @@ error. Workaround: The semicolon is replaced by a colon.
         return $new_date->format("ymd-His");
     }
     
+
     public function recordStream ($station , $stream = "") {
         if ($this->loginOk) {
             $this->killFfmpeg();
@@ -148,38 +105,23 @@ error. Workaround: The semicolon is replaced by a colon.
         $this->killVlc();
         $cvlc = '/usr/bin/cvlc';
 
-        // Local stream, escape spaces
-        if (substr($stream,0,4) != "http") {
-
-            if (is_dir($stream)) {
-                $stream = $this->playList($stream);
-            }
-            if (!is_file($stream)) {
-                return false;
-            }
-            $re = '/\ /m';
-            $subst = "\\ ";
-            $stream = preg_replace($re, $subst, $stream);
-
-            // Do not play if file name contains special characters
-            $re = '/[{}|&#"%~:<>*\'?]/m';
-            preg_match_all($re, $stream, $matches, PREG_SET_ORDER);
-            if (count($matches) > 0) {
-                return false;
-            }
-        }
-
         if ($stream != "" && is_file($cvlc)) {
+/*
+    https://wiki.videolan.org/VLC_command-line_help/
+        Volume (0 .. 8)
+        Default:  "--gain 1";
+    
+    Disable video output
+        --no-video
 
-            // https://wiki.videolan.org/VLC_command-line_help/
-            //  Volume (0 .. 8)
-            //  Default:  "--gain 1";
-            //
-            // Disable video output
-            // --no-video
+    Link files to a playlist
+        -Z
+*/
 
             $params = "--gain " . $vol / 100 . " --no-video";
-
+            if (isset($_POST['playlist'])) {
+                $params .= " -Z";
+            }
             // Delay audio when playing a TV stream
             if ($_audio_delay > 0 && substr($stream, -4) == "m3u8") {
                 $params .= " --audio-desync $_audio_delay";
@@ -190,9 +132,6 @@ error. Workaround: The semicolon is replaced by a colon.
             $stream = $this->replaceSemicolon($stream);
 
             // Play audio stream
-
-            // ffplay can't play playlists, but vlc can.
-            //$cmnd = "echo {$this->su} -c 'ffplay -nodisp -volume $vol $stream $no_msg'";
             $cmnd = "echo {$this->su} -c '$cvlc $params $stream $no_msg'";
 
             if ($this->loginOk) {

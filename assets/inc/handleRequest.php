@@ -1,7 +1,6 @@
 <?php
 defined('_RETRO_RADIO') or die ('Restricted access');
 
-
 // ------------------------------------------------------------------
 // Set volume
 // The account $_user must be included in the groups 'audio' and 'video'
@@ -87,6 +86,20 @@ if ($useStationIndex == 1) {
     }
 }
 
+// Escape special chars
+function fixName($fn) {
+    $re = [
+        ['/\ /m', "\\ "],
+        ['/\-/m', "\\-"],
+        ['/\(/m', "\\("],
+        ['/\)/m', "\\)"],
+    ];
+    $res = $fn;
+    for ($i = 0; $i < 4; $i++) {
+        $res = preg_replace($re[$i][0], $re[$i][1], $res);
+    }
+    return $res;
+}
 
 // Read stream list from CSV file
 /*
@@ -109,7 +122,7 @@ if (isset($key)) {
     if ($_play_key_click && !$volChanged) {
         // Play key click only when key is pressed
         if ($key != $sD->get('key')) {
-            $playS->playStream("$_srv/assets/audio/".$_schemes[$scheme][1], 40 , 0);
+            $playS->playStream("$_srv/assets/audio/".$_schemes[$scheme][1],40, 0);
             usleep(5E5);
         }
     }
@@ -127,14 +140,26 @@ if (isset($key)) {
             if ((isset($streams[$i]) && count($streams[$i]) > 1)) {
                 $station = trim($streams[$i][0]);
                 $url = trim($streams[$i][1]);
+                $streamName = $streams[$i][0];
                 $_SESSION['url'] = $url;
-                if ($key != $_SESSION['prevKey'] or $group != $sD->get('group')) {
+                if ($key != $_SESSION['prevKey'] or $group != $sD->get('group') or isset($_POST['playlist'])) {
                     $station = $streams[$i][0];
+
+                    // Playlist
+                    if (isset($_POST['playlist'])) {
+                        $songs = [];
+                        foreach($_POST['playlist'] as $song) {
+                            $songs[] = fixName($song);
+                        }
+                        $url = implode(" ", $songs);
+                    }
+
                     if (!$playS->playStream($url, 100, $_audio_delay)) {
                         $_SESSION['url'] = "";
                         $alert_msg = lang("play_error");
                     } else {
                         $_SESSION['url'] = $url;
+
                     }
                 }
             }

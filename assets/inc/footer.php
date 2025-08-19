@@ -7,9 +7,10 @@ defined('_RETRO_RADIO') or die ('Restricted access');
         <label class="fs-80" for="volume"><?php echo lang("volume")?></label><span id="show-vol"><?php echo $volume;?></span><br>
         <input class="pointer range w120 mt4" type="range" min="0" max="100" name="volume" id="volume" value="<?php echo $volume;?>">
     </div>
-    <div class="fc">
-        <label class="fs-80" for="scheme"><?php echo lang("decor")?></label><br>
-        <select class="pointer w120 mt4" name="scheme" id="scheme">
+<div class="fc">
+<label class='fs-80' for='scheme'><?php echo lang("decor")?></label><br>
+<select class='pointer w120 mt4' name='scheme' id='scheme'>
+
 <?php
 for ($i = 0; $i < count($_schemes); $i++) {
     $sel = "";
@@ -21,6 +22,7 @@ for ($i = 0; $i < count($_schemes); $i++) {
 
 ?>
         </select>
+
     </div>
     </div>
     <div class="flex-v">
@@ -41,13 +43,19 @@ for ($i = 1; $i <= $groups; $i++) {
     </div>
 
     <div class="fc">
-    <?php
-        if ($key > 0 && isset($streams[$key-1][0])) {
-            $placeholder = $streams[$key-1][0];    
-        } else {
-            $placeholder = lang("station");
-        }
-    ?>
+<?php
+// Playlist dialog
+if (substr($url,0,4) != "http" && is_dir($url)
+    && $key != $prevKey) {
+    require "assets/inc/selectTracks.php";
+} else {
+// Search station dialog
+    if ($key > 0 && isset($streams[$key-1][0])) {
+        $placeholder = $streams[$key-1][0];
+    } else {
+        $placeholder = lang("station");
+    }
+?>
         <label class="fs-80" for="search"><?php echo lang("direct_dial")?></label><br> 
         <input class="w120 bg bd mt4" type="text" id="search" name="search" placeholder="<?php echo $placeholder?>" autocomplete="off">
         <input type="hidden" name="useStationIndex" id="useStationIndex">
@@ -68,6 +76,7 @@ function dataList($names, $class='display-none') {
 echo dataList($streamlist->get_station_names($_streams_csv));
 ?>
         </ul>
+<?php } ?>
     </div>
 
     </div>

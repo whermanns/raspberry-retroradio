@@ -14,11 +14,12 @@ switch ($record) {
         $recordImg = "tape.webp";
 }
 
-echo "<label for='record'><input class='display-none' type='text' value='$record' id='record' name='record'>";
-echo "<img id='img-record' class='shadow' src='assets/img/$recordImg' alt='Record'></label>\n</div>\n";
+if (substr($url, 0, 4) == 'http'){
+    echo "<label for='record'><input class='display-none' type='text' value='$record' id='record' name='record'>";
+    echo "<img id='img-record' class='shadow' src='assets/img/$recordImg' alt='Record'></label>\n";
+}
 
-
-echo "<div id='keyboard' class='notranslate'>\n";
+echo "</div>\n<div id='keyboard'>\n";
 
 // Station selection buttons
 
@@ -40,7 +41,7 @@ for ($i=0; $i<=8; $i++) {
                     $title = "";
                 }
             }
-            echo "<div class='key-wrapper'><div class='key-caption notranslate'>$title</div>\n";
+            echo "<div class='key-wrapper'><div class='key-caption'>$title</div>\n";
             echo "<div class='key-inside'>\n";
             echo "<input type='radio' name='key' class='key display-none' id='key$i' $chk value='$i'>\n";
             echo "<label for='key$i' id='lbl$i'><span class='klbl'></span></label>\n";

@@ -7,7 +7,7 @@ Walter Hermanns, 2025
 
 
 // Version
-$_version = "1.4.2<br>2025-08-13";
+$_version = "1.6.0<br>2025-08-19";
 
 
 // Prevent direct call of included php files
@@ -89,6 +89,7 @@ function getLangFile($lang) {
     return $res;
 }
 
+// Localized Messages
 require getLangFile($_lang);
 
 
@@ -125,18 +126,25 @@ require "assets/inc/csvUpload.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Retro-Radio">
-    <meta name="keywords" content="Internetradio, Webradio">
+    <meta name="description" content="Retroradio based on Raspberry Pi">
+    <meta name="keywords" content="Internetradio, Webradio, Retroradio">
     <meta name="author" content="Walter Hermanns, 2025">
-    <meta name="google" content="notranslate" />
+    <meta name="google" content="notranslate">
     <title>Retroradio</title>
     <link rel="stylesheet" href="assets/css<?php echo $scheme;?>/style.min.css">
     <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
 </head>
 <body class="bg fg">
+<?php
+if (substr($url,0,4) != "http" && is_dir($url)
+    && $key != $prevKey) {
+    echo "<div class='coverContent'></div>\n";
+}
+?>
 <div class="container">
 
 <?php
+
 // Show menu
 require "assets/inc/dialogs.php";
 
@@ -147,6 +155,7 @@ require "assets/inc/img-container.php";
 <?php
 // Output keypad
 require "assets/inc/keyboard-container.php";
+
 
 // Select station list
 require "assets/inc/footer.php";

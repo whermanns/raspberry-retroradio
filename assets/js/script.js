@@ -235,21 +235,25 @@ gE("#scheme").addEventListener("change",()=>{
 })
 
 // Recording
-record.addEventListener("click",()=>{
-  if (recordV == 1) {
-    record.value = 0;
-  } else {
-    record.value = 1;
-  }
-  frm.submit();
-})
+if (record) {
+  record.addEventListener("click",()=>{
+    if (recordV == 1) {
+      record.value = 0;
+    } else {
+      record.value = 1;
+    }
+    frm.submit();
+  })
+}
 
-imgRec.addEventListener("mousedown",()=> {
-  imgRec.classList.remove("shadow");
-})
-imgRec.addEventListener("mouseup",()=> {
-  imgRec.classList.add("shadow");
-})
+if (imgRec) {
+  imgRec.addEventListener("mousedown",()=> {
+    imgRec.classList.remove("shadow");
+  })
+  imgRec.addEventListener("mouseup",()=> {
+    imgRec.classList.add("shadow");
+  })
+}
 
 // Volume
 function changeVol() {
@@ -334,7 +338,7 @@ function showInfo(i) {
 // Display codec info
 setInterval(()=>{
   if (url != '') {
-    if (url.slice(-4) != "m3u8") {
+    if (url.slice(-4) != "m3u8" && url.slice(0,4) == 'http') {
       fetch(srv + "/codec.php?url=" + url)
       .then((response) => response.json())
       .then((json) => showInfo(json));

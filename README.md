@@ -25,7 +25,6 @@ This project realizes a web radio based on a Raspberry Pi 3 or 4, which is opera
   * Enter a letter in the search bar and select a suggestion
 * Display information provided by the station
 * Play local or LAN-stored streams and playlists
-* Automatically create a playlist
 * Logarithmic volume control
 * Two display themes based on historical radios
   * Phillips Sirius BD431A
@@ -39,6 +38,7 @@ This project realizes a web radio based on a Raspberry Pi 3 or 4, which is opera
   * Define the language in `config.php`
 * **NEW in version 1.2**: Record radio stream
 * **NEW in version 1.4**: Play audio from TV stream
+* **Neu in Version 1.6**: Select one or more music tracks from a folder
 ---
 
 ## Installation Guide
