@@ -56,9 +56,9 @@
 	<li>Define the language in <code>config.php</code></li>
 	</ul>
 	</li>
-	<li><strong>NEW in version 1.2</strong>: Record radio stream</li>
-	<li><strong>NEW in version 1.4</strong>: Play audio from TV stream</li>
-	<li><strong>Neu in Version 1.6</strong>: Select one or more music tracks from a folder</li>
+	<li><strong>New in version 1.2</strong>: Record radio stream</li>
+	<li><strong>New in version 1.4</strong>: Play audio from TV stream</li>
+	<li><strong>New in Version 1.6</strong>: Select one or more music tracks from a folder</li>
 	</ul>
 	<hr>
 	<h2 id="installation-guide">Installation Guide</h2>
@@ -149,11 +149,11 @@
 	<hr>
 	<h3 id="configure-samba-if-necessary">Configure Samba if Necessary</h3>
 	<h4 id="create-folder-for-network-share">Create Folder for Network Share</h4>
-	<pre><code class="lang-shell">sudo <span class="hljs-built_in">mkdir</span> /share
-	sudo <span class="hljs-built_in">mkdir</span> /share/RecycleBin
+	<pre><code class="lang-shell">sudo <span class="hljs-built_in">mkdir</span> /freigabe
+	sudo <span class="hljs-built_in">mkdir</span> /freigabe/RecycleBin
 	</code></pre>
-	<p>Create a file named <code>desktop.ini</code> in the folder <code>/share/RecycleBin</code>:</p>
-	<pre><code class="lang-shell">sudo nano <span class="hljs-regexp">/share/</span>RecycleBin<span class="hljs-regexp">/desktop.ini</span>
+	<p>Create a file named <code>desktop.ini</code> in the folder <code>/freigabe/RecycleBin</code>:</p>
+	<pre><code class="lang-shell">sudo nano <span class="hljs-regexp">/freigabe/</span>RecycleBin<span class="hljs-regexp">/desktop.ini</span>
 	</code></pre>
 	<p>Content of <code>desktop.ini</code>:</p>
 	<pre><code class="lang-conf"><span class="hljs-section">[.ShellClassInfo]</span>
@@ -166,14 +166,15 @@
 	<span class="hljs-attr">FolderType</span>=Generic
 	</code></pre>
 	<p>Set permissions</p>
-	<pre><code class="lang-shell">sudo chmod <span class="hljs-number">777</span> -R /share
+	<pre><code class="lang-shell">sudo chmod <span class="hljs-number">777</span> -R /freigabe
 	</code></pre>
 	<h4 id="add-share-folder-to-samba-configuration-file">Add Share Folder to Samba Configuration File</h4>
 	<pre><code class="lang-shell">sudo nano <span class="hljs-regexp">/etc/</span>samba<span class="hljs-regexp">/smb.conf</span>
 	</code></pre>
 	<p>Append the following lines to the end of the file</p>
-	<pre><code class="lang-conf">[share]
-	<span class="hljs-keyword">comment</span> = <span class="hljs-keyword">Share</span>
+	<pre><code class="lang-conf">[freigabe]
+	<span class="hljs-keyword">comment</span> = Freigabe
+	<span class="hljs-keyword">path</span> = /freigabe
 	<span class="hljs-keyword">create</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
 	<span class="hljs-keyword">directory</span> <span class="hljs-keyword">mask</span> = <span class="hljs-number">0777</span>
 	<span class="hljs-keyword">force</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> = <span class="hljs-number">0766</span>
@@ -236,7 +237,7 @@
 	<h5 id="set-location-of-station-list-file-streams-csv-">Set Location of Station List File <code>streams.csv</code></h5>
 	<pre><code class="lang-conf"><span class="hljs-regexp">//</span> Location of the streams.csv file
 	<span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"streams.csv"</span>;
-	<span class="hljs-regexp">//</span> <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"/share/streams.csv"</span>;
+	<span class="hljs-regexp">//</span> <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"/freigabe/streams.csv"</span>;
 	<span class="hljs-regexp">//</span> <span class="hljs-variable">$_streams_csv</span> = <span class="hljs-string">"/tmp/streams.csv"</span>;
 	</code></pre>
 	<h4 id="set-audio-delay-when-playing-a-tv-stream">Set audio delay when playing a TV stream</h4>
@@ -245,11 +246,11 @@
 	</code></pre>
 	<p><strong>Important:</strong> The web server account <code>www-data</code> must have read/write permissions for this folder.</p>
 	<h5 id="set-up-access-to-shared-folders">Set up access to shared folders</h5>
-	<p>Example: The file was stored in the <code>/share</code> folder.</p>
-	<pre><code class="lang-shell"><span class="hljs-title">sudo</span> chown www-<span class="hljs-class"><span class="hljs-keyword">data</span> -<span class="hljs-type">R</span> /share</span>
+	<p>Example: The file was stored in the <code>/freigabe</code> folder.</p>
+	<pre><code class="lang-shell"><span class="hljs-title">sudo</span> chown www-<span class="hljs-class"><span class="hljs-keyword">data</span> -<span class="hljs-type">R</span> /freigabe</span>
 	</code></pre>
 	<p>oder</p>
-	<pre><code class="lang-shell">sudo chmod <span class="hljs-number">777</span> -R /share
+	<pre><code class="lang-shell">sudo chmod <span class="hljs-number">777</span> -R /freigabe
 	</code></pre>
 	<hr>
 	<h3 id="operation">Operation</h3>

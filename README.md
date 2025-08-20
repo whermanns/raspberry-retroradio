@@ -36,9 +36,9 @@ This project realizes a web radio based on a Raspberry Pi 3 or 4, which is opera
 * Additional languages can be easily added
   * E.g., copy `assets/lang/en.php` to `assets/lang/fr.php` and adapt it
   * Define the language in `config.php`
-* **NEW in version 1.2**: Record radio stream
-* **NEW in version 1.4**: Play audio from TV stream
-* **Neu in Version 1.6**: Select one or more music tracks from a folder
+* **New in version 1.2**: Record radio stream
+* **New in version 1.4**: Play audio from TV stream
+* **New in Version 1.6**: Select one or more music tracks from a folder
 ---
 
 ## Installation Guide
@@ -183,14 +183,14 @@ sudo service nginx restart
 #### Create Folder for Network Share
 
 ```shell
-sudo mkdir /share
-sudo mkdir /share/RecycleBin
+sudo mkdir /freigabe
+sudo mkdir /freigabe/RecycleBin
 ```
 
-Create a file named `desktop.ini` in the folder `/share/RecycleBin`:
+Create a file named `desktop.ini` in the folder `/freigabe/RecycleBin`:
 
 ```shell
-sudo nano /share/RecycleBin/desktop.ini
+sudo nano /freigabe/RecycleBin/desktop.ini
 ```
 
 Content of `desktop.ini`:
@@ -207,7 +207,7 @@ FolderType=Generic
 
 Set permissions
 ```shell
-sudo chmod 777 -R /share
+sudo chmod 777 -R /freigabe
 ```
 
 #### Add Share Folder to Samba Configuration File
@@ -219,8 +219,9 @@ sudo nano /etc/samba/smb.conf
 Append the following lines to the end of the file
 
 ```conf
-[share]
-   comment = Share
+[freigabe]
+   comment = Freigabe
+   path = /freigabe
    create mask = 0777
    directory mask = 0777
    force create mode = 0766
@@ -315,7 +316,7 @@ $_play_key_click = true;
 ```conf
 // Location of the streams.csv file
 $_streams_csv = "streams.csv";
-// $_streams_csv = "/share/streams.csv";
+// $_streams_csv = "/freigabe/streams.csv";
 // $_streams_csv = "/tmp/streams.csv";
 ```
 
@@ -329,16 +330,16 @@ $_audio_delay = 1300;
 
 ##### Set up access to shared folders
 
-Example: The file was stored in the `/share` folder.
+Example: The file was stored in the `/freigabe` folder.
 
 ```shell
-sudo chown www-data -R /share
+sudo chown www-data -R /freigabe
 ```
 
 oder
 
 ```shell
-sudo chmod 777 -R /share
+sudo chmod 777 -R /freigabe
 ```
 ---
 
