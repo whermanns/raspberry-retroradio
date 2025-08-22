@@ -38,8 +38,12 @@ const search = gE("#search");
 const vorschlag = gE("#vorschlag");
 const stationIndex = gE("#stationIndex");
 const uSi = gE("#useStationIndex");
-const stationlist = vorschlag.children;
-const sl = stationlist.length;
+let stationlist = null;
+let sl = 0;
+if (vorschlag) {
+  let stationlist = vorschlag.children;
+  sl = stationlist.length;
+}
 
 
 // Keyboard events
@@ -377,40 +381,42 @@ setInterval(()=>{
 
 
 // Direkt input
-const stations = [];
-for (let i=0; i < sl; i++) {
-  stations.push(stationlist[i].innerText);
-}
+if (stationlist) {
+  const stations = [];
+  for (let i=0; i < sl; i++) {
+    stations.push(stationlist[i].innerText);
+  }
 
-search.addEventListener('input', (e)=> {
-  const v = search.value.toLowerCase();
-  if (v) {
-    for (let i=0; i < sl; i++) {
-      if (stations[i].toLowerCase().includes(v)) {
-        stationlist[i].classList.add("show");
-        stationlist[i].addEventListener("click", ()=>{
-          search.value = stations[i];
-          stationIndex.value = i;
-          uSi.value = 1;
-          frm.submit();
-        })
-      } else {
-        uSi.value = 0;
+  search.addEventListener('input', (e)=> {
+    const v = search.value.toLowerCase();
+    if (v) {
+      for (let i=0; i < sl; i++) {
+        if (stations[i].toLowerCase().includes(v)) {
+          stationlist[i].classList.add("show");
+          stationlist[i].addEventListener("click", ()=>{
+            search.value = stations[i];
+            stationIndex.value = i;
+            uSi.value = 1;
+            frm.submit();
+          })
+        } else {
+          uSi.value = 0;
+          stationlist[i].classList.remove("show");
+        }
+      }
+    } else {
+      for (let i=0; i < sl; i++) {
         stationlist[i].classList.remove("show");
       }
+      stationIndex.value = "";
+      uSi.value = 0;
     }
-  } else {
-    for (let i=0; i < sl; i++) {
-      stationlist[i].classList.remove("show");
-    }
-    stationIndex.value = "";
-    uSi.value = 0;
-  }
-})
+  })
+}
 
 // Click on background
 window.addEventListener("click", function(e){
-  if (search != e.target) {
+  if (stationlist && search != e.target) {
     search.value = "";
     for (let i=0; i < sl; i++) {
       stationlist[i].classList.remove("show");
